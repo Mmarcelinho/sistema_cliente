@@ -29,9 +29,10 @@ public class ClienteController : SistemaClienteController
 
     [HttpPost]
     [ProducesResponseType(typeof(RespostaClienteJson), StatusCodes.Status201Created)]
-    public async Task<IActionResult> Registrar([FromBody] RegistrarClienteCommand requisicao)
+    public async Task<IActionResult> Registrar([FromBody] RequisicaoClienteJson requisicao)
     {
-        var resposta = await _mediator.Send(requisicao);
+        var command = new RegistrarClienteCommand(requisicao);
+        var resposta = await _mediator.Send(command);
 
         return Created(string.Empty, resposta);
     }
