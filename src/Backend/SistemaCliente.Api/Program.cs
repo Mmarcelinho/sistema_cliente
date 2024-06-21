@@ -1,11 +1,10 @@
-using SistemaCliente.Infrastructure;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AdicionarInfrastructure(builder.Configuration);
+builder.Services.AdicionarApplication();
 
 var app = builder.Build();
 
