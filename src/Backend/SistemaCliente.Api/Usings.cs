@@ -4,6 +4,7 @@ global using Microsoft.AspNetCore.Diagnostics;
 global using MediatR;
 
 global using SistemaCliente.Infrastructure;
+global using SistemaCliente.Infrastructure.Migrations;
 
 global using SistemaCliente.Application;
 global using SistemaCliente.Application.UseCases.Cliente.Registrar;
