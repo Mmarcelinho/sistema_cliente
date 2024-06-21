@@ -1,5 +1,3 @@
-
-
 namespace SistemaCliente.Api.Controllers;
 
 public class ClienteController : SistemaClienteController
