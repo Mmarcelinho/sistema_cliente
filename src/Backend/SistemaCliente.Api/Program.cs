@@ -27,6 +27,13 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
+await AtualizarBaseDeDados();
+
 app.Run();
 
+async Task AtualizarBaseDeDados()
+{
+    await using var scope = app.Services.CreateAsyncScope();
 
+    await MigrateExtension.MigrateBancoDeDados(scope.ServiceProvider);
+}
