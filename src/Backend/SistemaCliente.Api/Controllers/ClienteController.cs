@@ -16,6 +16,17 @@ public class ClienteController : SistemaClienteController
         return Ok(resposta);
     }
 
+    [HttpGet]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(RespostaClienteJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> RecuperarPorId([FromRoute] long id)
+    {
+        var resposta = await _mediator.Send(new RecuperarClientePorIdQuery(id));
+
+        return Ok(resposta);
+    }
+
     [HttpPost]
     [ProducesResponseType(typeof(RespostaClienteJson), StatusCodes.Status201Created)]
     public async Task<IActionResult> RegistrarCliente([FromBody] RegistrarClienteCommand requisicao)
