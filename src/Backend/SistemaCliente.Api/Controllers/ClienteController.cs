@@ -8,6 +8,7 @@ public class ClienteController : SistemaClienteController
 
     [HttpGet]
     [ProducesResponseType(typeof(RespostaClienteJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> RecuperarTodos()
     {
         var resposta = await _mediator.Send(new RecuperarTodosClientesQuery());

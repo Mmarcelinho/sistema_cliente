@@ -42,7 +42,7 @@ public class ClienteQueries
         [Id],
         [NomeEmpresa],
         [Porte],
-        [DataCriacao] FROM {tabela} WITH (READPAST) WHERE Id @Id";
+        [DataCriacao] FROM {tabela} WITH (READPAST) WHERE Id = @Id";
 
         var parameters = new
         {
