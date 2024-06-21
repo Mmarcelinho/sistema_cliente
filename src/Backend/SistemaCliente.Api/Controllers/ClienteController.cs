@@ -1,3 +1,5 @@
+using SistemaCliente.Application.UseCases.Cliente.Deletar;
+
 namespace SistemaCliente.Api.Controllers;
 
 public class ClienteController : SistemaClienteController
@@ -34,5 +36,16 @@ public class ClienteController : SistemaClienteController
         var resposta = await _mediator.Send(requisicao);
 
         return Created(string.Empty, resposta);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> RegistrarCliente([FromRoute] long id)
+    {
+        var command = new DeletarClienteCommand(id);
+        await _mediator.Send(command);
+
+        return NoContent();
     }
 }
