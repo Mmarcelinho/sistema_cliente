@@ -29,17 +29,28 @@ public class ClienteController : SistemaClienteController
 
     [HttpPost]
     [ProducesResponseType(typeof(RespostaClienteJson), StatusCodes.Status201Created)]
-    public async Task<IActionResult> RegistrarCliente([FromBody] RegistrarClienteCommand requisicao)
+    public async Task<IActionResult> Registrar([FromBody] RegistrarClienteCommand requisicao)
     {
         var resposta = await _mediator.Send(requisicao);
 
         return Created(string.Empty, resposta);
     }
 
+    [HttpPut]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> Atualizar([FromRoute] long id, [FromBody] RequisicaoClienteJson requisicao)
+    {
+        var command = new AtualizarClienteCommand(id, requisicao);
+        await _mediator.Send(command);
+
+        return NoContent();
+    }
+
     [HttpDelete]
     [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> RegistrarCliente([FromRoute] long id)
+    public async Task<IActionResult> Deletar([FromRoute] long id)
     {
         var command = new DeletarClienteCommand(id);
         await _mediator.Send(command);
