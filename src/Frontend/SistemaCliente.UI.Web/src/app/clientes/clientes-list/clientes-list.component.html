@@ -1,0 +1,15 @@
+<mat-card-subtitle> Listando todos Clientes </mat-card-subtitle>
+@if (clienteObservable | async ) {
+<div class="container wrap">
+  @for (cliente of clientes; track cliente.id) {
+    <app-clientes-card [cliente]="cliente"></app-clientes-card>
+  } @empty {
+    <span>Sem clientes. Crie um no botão "Novo"</span>
+  }
+</div>
+} @else {
+<loading-bar></loading-bar>
+}
+<mat-card-actions align="end">
+  <button mat-button [routerLink]="['/clientes/registrar']">Novo</button>
+</mat-card-actions>
