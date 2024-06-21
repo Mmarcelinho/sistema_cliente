@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{0F34
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaCliente.Domain", "src\Backend\SistemaCliente.Domain\SistemaCliente.Domain.csproj", "{2D619A46-65DB-4E35-9738-79E196BEEFBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaCliente.Infrastructure", "src\Backend\SistemaCliente.Infrastructure\SistemaCliente.Infrastructure.csproj", "{91373D62-1551-4018-B277-10A3CB69AB40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaCliente.Api", "src\Backend\SistemaCliente.Api\SistemaCliente.Api.csproj", "{827DC8C7-E91C-408C-BE03-20C400DE7C9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,9 +26,19 @@ Global
 		{2D619A46-65DB-4E35-9738-79E196BEEFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D619A46-65DB-4E35-9738-79E196BEEFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D619A46-65DB-4E35-9738-79E196BEEFBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91373D62-1551-4018-B277-10A3CB69AB40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91373D62-1551-4018-B277-10A3CB69AB40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91373D62-1551-4018-B277-10A3CB69AB40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91373D62-1551-4018-B277-10A3CB69AB40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{827DC8C7-E91C-408C-BE03-20C400DE7C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{827DC8C7-E91C-408C-BE03-20C400DE7C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{827DC8C7-E91C-408C-BE03-20C400DE7C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{827DC8C7-E91C-408C-BE03-20C400DE7C9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0F34FFF1-4552-4FF1-AF99-A00772376544} = {3650CE55-F665-4EB9-A56A-5CA71F6BBA05}
 		{2D619A46-65DB-4E35-9738-79E196BEEFBB} = {0F34FFF1-4552-4FF1-AF99-A00772376544}
+		{91373D62-1551-4018-B277-10A3CB69AB40} = {0F34FFF1-4552-4FF1-AF99-A00772376544}
+		{827DC8C7-E91C-408C-BE03-20C400DE7C9B} = {0F34FFF1-4552-4FF1-AF99-A00772376544}
 	EndGlobalSection
 EndGlobal
