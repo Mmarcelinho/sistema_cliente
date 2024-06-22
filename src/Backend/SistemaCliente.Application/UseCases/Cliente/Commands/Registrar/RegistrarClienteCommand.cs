@@ -16,6 +16,8 @@ public class RegistrarClienteCommandHandler : IRequestHandler<RegistrarClienteCo
 
     public async Task<RespostaClienteJson> Handle(RegistrarClienteCommand request, CancellationToken cancellationToken)
     {
+        await Validar(request.requisicaoCliente);
+        
         var cliente = new Domain.Entidades.Cliente
         {
             NomeEmpresa = request.requisicaoCliente.NomeEmpresa,
@@ -33,5 +35,13 @@ public class RegistrarClienteCommandHandler : IRequestHandler<RegistrarClienteCo
             (Communication.Enums.Porte)cliente.Porte,
             cliente.DataCriacao
         );
+    }
+
+    private async Task Validar(RequisicaoClienteJson requisicao)
+    {
+        var clienteExiste = await _repositorio.ExisteClienteComEmpresa(requisicao.NomeEmpresa);
+
+        if(clienteExiste)
+            throw new Exception(ClienteMensagensDeErro.CLIENTE_JA_REGISTRADO);
     }
 }
