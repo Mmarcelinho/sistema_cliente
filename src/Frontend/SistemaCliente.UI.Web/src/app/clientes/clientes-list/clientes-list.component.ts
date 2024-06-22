@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Cliente } from '../cliente.dto';
-import { Observable, lastValueFrom } from 'rxjs';
+import { EMPTY, Observable, catchError } from 'rxjs';
 import { ClienteService } from '../cliente.service';
 import { MaterialModule } from '../../material.module';
 import { LoadingBarComponent } from '../../loading-bar.component';
@@ -16,13 +16,17 @@ import { ClientesCardComponent } from './clientes-card/clientes-card.component';
   styles: ``,
 })
 export class ClientesListComponent implements OnInit {
-  clientes!: Cliente[];
-  clienteObservable!: Observable<Cliente[]>;
+  clientes$!: Observable<Cliente[]>;
+  error!: string;
+  private clienteService = inject(ClienteService);
 
-  constructor(private clienteService: ClienteService) {}
 
   async ngOnInit() {
-    this.clienteObservable = this.clienteService.RecuperarTodos();
-    this.clientes = await lastValueFrom(this.clienteObservable);
+    this.clientes$ = this.clienteService.RecuperarTodos().pipe(
+      catchError(error => {
+        this.error = error.message
+        return EMPTY
+      })
+    )
   }
 }
