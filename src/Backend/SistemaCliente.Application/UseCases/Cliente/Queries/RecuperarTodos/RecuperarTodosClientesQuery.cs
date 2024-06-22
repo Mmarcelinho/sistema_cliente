@@ -1,4 +1,4 @@
-namespace SistemaCliente.Application.UseCases.Cliente.RecuperarTodos;
+namespace SistemaCliente.Application.UseCases.Cliente.Queries.RecuperarTodos;
 
 public class RecuperarTodosClientesQuery : IRequest<IEnumerable<RespostaClienteJson>>
 {
