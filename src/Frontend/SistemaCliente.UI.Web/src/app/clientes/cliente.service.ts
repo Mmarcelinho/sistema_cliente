@@ -31,4 +31,12 @@ export class ClienteService {
   public Deletar(id?: number): Observable<Cliente> {
     return this.http.delete<Cliente>(environment.api + 'cliente/' + id);
   }
+
+  public Criar(): Cliente {
+    return {
+      id: 0,
+      nomeEmpresa: '',
+      porte: 0
+    }
+  }
 }
