@@ -1,3 +1,7 @@
+using SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.Dapper;
+using SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.EF;
+using SistemaCliente.Infrastructure.Factory;
+
 namespace SistemaCliente.Infrastructure;
 
 public static class DependencyInjectionExtension
@@ -5,7 +9,7 @@ public static class DependencyInjectionExtension
     public static void AdicionarInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         AdicionarContexto(services, configuration);
-        AdicionarDbConnection(services, configuration);
+        AdicionarSqlFactory(services);
         AdicionarRepositorios(services);
     }
 
@@ -19,24 +23,15 @@ public static class DependencyInjectionExtension
         });
     }
 
-    private static void AdicionarDbConnection(IServiceCollection services, IConfiguration configuration)
-    {
-        var connectionString = configuration.GetConnectionString("Conexao");
+    private static void AdicionarSqlFactory(IServiceCollection services)
+    => services.AddScoped<SqlFactory>();
 
-        services.AddSingleton<IDbConnection>
-        (provider =>
-        {
-            var connection = new SqlConnection(connectionString);
-            connection.Open();
-            return connection;
-        });
-    }
 
     private static void AdicionarRepositorios(IServiceCollection services)
     {
-        services.AddScoped<IClienteReadOnlyRepositorio, ClienteRepositorio>();
-        services.AddScoped<IClienteWriteOnlyRepositorio, ClienteRepositorio>();
-        services.AddScoped<IClienteUpdateOnlyRepositorio, ClienteRepositorio>();
+        services.AddScoped<IClienteReadOnlyRepositorio, ClienteDapperRepositorio>();
+        services.AddScoped<IClienteWriteOnlyRepositorio, ClienteEfRepositorio>();
+        services.AddScoped<IClienteUpdateOnlyRepositorio, ClienteEfRepositorio>();
 
         services.AddScoped<IUnidadeDeTrabalho, UnidadeDeTrabalho>();
     }

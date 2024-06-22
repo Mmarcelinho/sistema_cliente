@@ -4,5 +4,5 @@ public interface IClienteWriteOnlyRepositorio
 {
     Task Registrar(Entidades.Cliente cliente);
 
-    Task<bool> Deletar(long clienteId);
+    Task<bool> Deletar(long id);
 }
