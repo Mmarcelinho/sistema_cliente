@@ -4,6 +4,7 @@ import { ClientesListComponent } from './clientes/clientes-list/clientes-list.co
 import { ClientesShowComponent } from './clientes/clientes-show/clientes-show.component';
 import { ClientesEditComponent } from './clientes/clientes-edit/clientes-edit.component';
 import { ClientesDeleteComponent } from './clientes/clientes-delete/clientes-delete.component';
+import { ClientesNewComponent } from './clientes/clientes-new/clientes-new.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
       {
         path: 'deletar/:id',
         component: ClientesDeleteComponent
+      },
+      {
+        path: 'registrar',
+        component: ClientesNewComponent
       }
     ],
   },
