@@ -33,9 +33,9 @@ export class ClientesDeleteComponent {
     this.cliente = await lastValueFrom(this.clienteObservable);
   }
 
-  async confirmDelete() {
+    async confirmDelete() {
     this.clienteObservable = this.clienteService.Deletar(this.cliente.id);
-    this.cliente = await lastValueFrom(this.clienteObservable);
+    await lastValueFrom(this.clienteObservable);
     this.router.navigate(['/clientes']);
   }
 }
