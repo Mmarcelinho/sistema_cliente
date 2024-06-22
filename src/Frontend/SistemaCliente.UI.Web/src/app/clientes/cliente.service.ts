@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from './cliente.dto';
 import { environment } from '../../environments/environment.development';
@@ -8,7 +8,8 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root',
 })
 export class ClienteService {
-  constructor(private http: HttpClient) {}
+
+  private http = inject(HttpClient);
 
   public RecuperarTodos(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(environment.api + 'cliente');
