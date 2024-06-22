@@ -9,27 +9,33 @@ import { ClientesNewComponent } from './clientes/clientes-new/clientes-new.compo
 export const routes: Routes = [
   {
     path: 'clientes',
-    component: ClientesComponent,
+    loadComponent: () =>
+      import('./clientes/clientes.component').then((c) => c.ClientesComponent),
     children: [
       {
         path: '',
-        component: ClientesListComponent
+        loadComponent: () =>
+          import('./clientes/clientes-list/clientes-list.component').then((c) => c.ClientesListComponent)
       },
       {
         path: 'exibir/:id',
-        component: ClientesShowComponent
+        loadComponent: () =>
+          import('./clientes/clientes-show/clientes-show.component').then((c) => c.ClientesShowComponent)
       },
       {
         path: 'editar/:id',
-        component: ClientesEditComponent
+        loadComponent: () =>
+          import('./clientes/clientes-edit/clientes-edit.component').then((c) => c.ClientesEditComponent)
       },
       {
         path: 'deletar/:id',
-        component: ClientesDeleteComponent
+        loadComponent: () =>
+          import('./clientes/clientes-delete/clientes-delete.component').then((c) => c.ClientesDeleteComponent)
       },
       {
         path: 'registrar',
-        component: ClientesNewComponent
+        loadComponent: () =>
+          import('./clientes/clientes-new/clientes-new.component').then((c) => c.ClientesNewComponent)
       }
     ],
   },

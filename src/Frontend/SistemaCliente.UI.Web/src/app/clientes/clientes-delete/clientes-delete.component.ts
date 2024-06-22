@@ -20,7 +20,7 @@ import { Observable, lastValueFrom } from 'rxjs';
   templateUrl: './clientes-delete.component.html',
   styles: ``,
 })
-export class ClientesDeleteComponent implements OnInit {
+export class ClientesDeleteComponent {
   route = inject(ActivatedRoute);
   router = inject(Router);
   clienteService = inject(ClienteService);

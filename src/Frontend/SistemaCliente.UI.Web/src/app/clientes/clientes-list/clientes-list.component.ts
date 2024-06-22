@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../cliente.dto';
 import { Observable, lastValueFrom } from 'rxjs';
 import { ClienteService } from '../cliente.service';
@@ -15,7 +15,7 @@ import { ClientesCardComponent } from './clientes-card/clientes-card.component';
   templateUrl: './clientes-list.component.html',
   styles: ``,
 })
-export class ClientesListComponent {
+export class ClientesListComponent implements OnInit {
   clientes!: Cliente[];
   clienteObservable!: Observable<Cliente[]>;
 
