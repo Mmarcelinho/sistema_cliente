@@ -37,10 +37,10 @@ export class ClientesEditComponent {
   async onSave(cliente: Cliente) {
     this.clienteObservable = this.clienteService.Registrar(cliente);
     this.cliente = await lastValueFrom(this.clienteObservable);
-    this.router.navigate(['/clientes/exibir/', cliente?.id]);
+    this.router.navigate(['/clientes/exibir/', cliente.id]);
   }
 
   onBack() {
-    this.router.navigate(['/clientes']);
+    this.router.navigate(['/clientes/exibir/', this.cliente.id]);
   }
 }
