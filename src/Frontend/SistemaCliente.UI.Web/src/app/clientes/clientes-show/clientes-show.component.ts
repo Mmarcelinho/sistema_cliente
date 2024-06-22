@@ -25,7 +25,6 @@ export class ClientesShowComponent {
     const id: Number = +(this.route.snapshot.paramMap.get('id') || 0);
     this.clienteObservable = this.clienteService.RecuperarPorId(id);
     this.cliente = await lastValueFrom(this.clienteObservable);
-    console.log(this.cliente);
   }
 
   getPorteString(porte: Porte): string {
