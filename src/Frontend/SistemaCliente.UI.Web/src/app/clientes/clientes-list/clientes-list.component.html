@@ -1,5 +1,6 @@
 <mat-card-subtitle> Listando todos Clientes </mat-card-subtitle> <br />
-@if (clienteObservable | async ) {
+
+@if ( clientes$ | async; as clientes ) {
 <div class="container wrap">
   @for (cliente of clientes; track cliente.id) { @defer (on viewport){
   <app-clientes-card [cliente]="cliente"></app-clientes-card>
