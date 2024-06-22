@@ -29,13 +29,13 @@ export class ClientesNewComponent {
   clienteObservable!: Observable<Cliente>;
 
   async ngOnInit() {
-    this.clienteObservable = await of(this.clienteService.Criar())
+    this.clienteObservable = await of(this.clienteService.Criar());
     this.cliente = await lastValueFrom(this.clienteObservable);
   }
 
   async onSave(cliente: Cliente) {
     this.clienteObservable = this.clienteService.Registrar(cliente);
-    const resultado = this.cliente = await lastValueFrom(this.clienteObservable);
+    const resultado = await lastValueFrom(this.clienteObservable);
     this.router.navigate(['/clientes/exibir/', resultado.id]);
   }
 
