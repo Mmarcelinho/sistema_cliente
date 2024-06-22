@@ -1,4 +1,4 @@
-namespace SistemaCliente.Application.UseCases.Cliente.RecuperarPorId;
+namespace SistemaCliente.Application.UseCases.Cliente.Queries.RecuperarPorId;
 
 public record RecuperarClientePorIdQuery(long clienteId) : IRequest<RespostaClienteJson>;
 

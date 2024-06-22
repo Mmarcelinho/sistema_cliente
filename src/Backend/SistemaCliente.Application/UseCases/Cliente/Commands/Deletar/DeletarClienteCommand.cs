@@ -1,4 +1,4 @@
-namespace SistemaCliente.Application.UseCases.Cliente.Deletar;
+namespace SistemaCliente.Application.UseCases.Cliente.Commands.Deletar;
 
 public record DeletarClienteCommand(long clienteId) : IRequest;
 

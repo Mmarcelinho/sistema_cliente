@@ -1,4 +1,4 @@
-namespace SistemaCliente.Application.UseCases.Cliente.Atualizar;
+namespace SistemaCliente.Application.UseCases.Cliente.Commands.Atualizar;
 
     public record AtualizarClienteCommand(long Id, RequisicaoClienteJson requisicaoCliente) : IRequest;
 

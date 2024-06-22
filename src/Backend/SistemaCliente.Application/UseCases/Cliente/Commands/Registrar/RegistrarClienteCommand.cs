@@ -1,4 +1,4 @@
-namespace SistemaCliente.Application.UseCases.Cliente.Registrar;
+namespace SistemaCliente.Application.UseCases.Cliente.Commands.Registrar;
 
     public record RegistrarClienteCommand(RequisicaoClienteJson requisicaoCliente) : IRequest<RespostaClienteJson>;
 

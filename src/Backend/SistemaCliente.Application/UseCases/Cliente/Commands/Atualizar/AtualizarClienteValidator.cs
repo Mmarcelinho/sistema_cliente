@@ -1,10 +1,10 @@
-namespace SistemaCliente.Application.UseCases.Cliente.Registrar;
+namespace SistemaCliente.Application.UseCases.Cliente.Commands.Atualizar;
 
-public class RegistrarClienteValidator : AbstractValidator<RegistrarClienteCommand>
+public class AtualizarClienteValidator : AbstractValidator<AtualizarClienteCommand>
 {
     private readonly IClienteReadOnlyRepositorio _repositorio;
 
-    public RegistrarClienteValidator(IClienteReadOnlyRepositorio repositorio)
+    public AtualizarClienteValidator(IClienteReadOnlyRepositorio repositorio)
     {
         _repositorio = repositorio;
 
