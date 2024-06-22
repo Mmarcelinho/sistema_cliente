@@ -15,6 +15,7 @@
     <ProjectReference Include="..\..\src\Backend\SistemaCliente.Infrastructure\SistemaCliente.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Backend\SistemaCliente.Communication\SistemaCliente.Communication.csproj" />
     <ProjectReference Include="..\..\src\Backend\SistemaCliente.Domain\SistemaCliente.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Backend\SistemaCliente.Application\SistemaCliente.Application.csproj" />
   </ItemGroup>
 
 </Project>
