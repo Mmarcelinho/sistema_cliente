@@ -2,8 +2,6 @@ namespace SistemaCliente.Exceptions.MensagensDeErro;
 
 public static class ClienteMensagensDeErro
 {
-    public static string EMPRESA_CLIENTE_NAO_INFORMADA = "A empresa do cliente deve ser informada.";
-
     public static string EMPRESA_CLIENTE_NOME_EM_BRANCO = "O nome da empresa do cliente deve ser informado.";
 
     public static string EMPRESA_CLIENTE_PORTE_INVALIDO = "O porte da empresa do cliente é inválido.";

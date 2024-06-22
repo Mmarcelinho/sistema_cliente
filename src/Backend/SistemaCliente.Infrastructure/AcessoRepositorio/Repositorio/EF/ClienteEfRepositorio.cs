@@ -22,4 +22,6 @@ public class ClienteEfRepositorio : IClienteWriteOnlyRepositorio, IClienteUpdate
         _contexto.Clientes.Remove(cliente);
         return true;
     }
+
+    public async Task<bool> ExisteClienteComEmpresa(string nomeEmpresa) => await _contexto.Clientes.AnyAsync(cliente => cliente.NomeEmpresa.Equals(nomeEmpresa));
 }
