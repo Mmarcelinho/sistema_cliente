@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { AsyncPipe } from '@angular/common';
 import { LoadingBarComponent } from '../../loading-bar.component';
@@ -21,12 +21,11 @@ import { ClientesFormComponent } from '../clientes-form/clientes-form.component'
   templateUrl: './clientes-new.component.html',
   styles: ``
 })
-export class ClientesNewComponent {
-  route = inject(ActivatedRoute);
+export class ClientesNewComponent implements OnInit {
   router = inject(Router);
   clienteService = inject(ClienteService);
-  cliente!: Cliente;
   clienteObservable!: Observable<Cliente>;
+  cliente: Cliente = this.clienteService.Criar();
 
   async ngOnInit() {
     this.clienteObservable = await of(this.clienteService.Criar());
