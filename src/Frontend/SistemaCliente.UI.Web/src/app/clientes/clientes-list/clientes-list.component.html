@@ -1,10 +1,14 @@
-<mat-card-subtitle> Listando todos Clientes </mat-card-subtitle>
+<mat-card-subtitle> Listando todos Clientes </mat-card-subtitle> <br />
 @if (clienteObservable | async ) {
 <div class="container wrap">
-  @for (cliente of clientes; track cliente.id) {
-    <app-clientes-card [cliente]="cliente"></app-clientes-card>
-  } @empty {
-    <span>Sem clientes. Crie um no botão "Novo"</span>
+  @for (cliente of clientes; track cliente.id) { @defer (on viewport){
+  <app-clientes-card [cliente]="cliente"></app-clientes-card>
+  } @placeholder {
+  <span>Placeholder</span>
+  } @loading {
+  <span>Carregando</span>
+  } } @empty {
+  <span>Sem clientes. Crie um no botão "Novo"</span>
   }
 </div>
 } @else {
