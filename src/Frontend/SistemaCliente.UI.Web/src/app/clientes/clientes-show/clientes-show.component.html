@@ -1,0 +1,22 @@
+@if (clienteObservable | async ) {
+<mat-card-content>
+  <strong> {{ cliente.nomeEmpresa }} </strong> <br />
+  <p>{{ getPorteString(cliente.porte) }}</p>
+</mat-card-content>
+<mat-card-actions>
+  <button mat-button [routerLink]="['/clientes']">Voltar</button>
+  <div class="width-full"></div>
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="['/clientes/editar/', cliente.id]"
+  >
+    Editar
+  </button>
+  <button mat-button [routerLink]="['/clientes/deletar/', cliente.id]">
+    Deletar
+  </button>
+</mat-card-actions>
+} @else {
+<loading-bar></loading-bar>
+}

@@ -14,4 +14,8 @@ export class ClienteService {
   public RecuperarTodos(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(environment.api + 'cliente');
   }
+
+  public RecuperarPorId(id: Number): Observable<Cliente> {
+    return this.http.get<Cliente>(environment.api + 'cliente/' + id);
+  }
 }
