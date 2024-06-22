@@ -1,0 +1,18 @@
+@if (clienteObservable | async ) {
+<mat-card-content>
+  <h3>Deletar {{ cliente.nomeEmpresa }}?</h3>
+</mat-card-content>
+<mat-card-actions class="container">
+  <button mat-button color="warn" (click)="confirmDelete()">Sim</button>
+  <div class="width-full"></div>
+  <button
+    mat-button
+    color="primary"
+    [routerLink]="['/clientes/exibir', cliente.id]"
+  >
+    Não
+  </button>
+</mat-card-actions>
+} @else {
+<loading-bar></loading-bar>
+}
