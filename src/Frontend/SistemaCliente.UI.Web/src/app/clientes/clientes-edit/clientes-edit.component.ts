@@ -2,21 +2,28 @@ import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { AsyncPipe } from '@angular/common';
 import { LoadingBarComponent } from '../../loading-bar.component';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClienteService } from '../cliente.service';
 import { Cliente } from '../cliente.dto';
 import { Observable, lastValueFrom } from 'rxjs';
-import { Porte } from '../enum/porte';
+import { ClientesFormComponent } from '../clientes-form/clientes-form.component';
 
 @Component({
-  selector: 'app-clientes-show',
+  selector: 'app-clientes-edit',
   standalone: true,
-  imports: [MaterialModule, AsyncPipe, LoadingBarComponent, RouterLink],
-  templateUrl: './clientes-show.component.html',
+  imports: [
+    MaterialModule,
+    AsyncPipe,
+    LoadingBarComponent,
+    RouterLink,
+    ClientesFormComponent,
+  ],
+  templateUrl: './clientes-edit.component.html',
   styles: ``,
 })
-export class ClientesShowComponent {
+export class ClientesEditComponent {
   route = inject(ActivatedRoute);
+  router = inject(Router);
   clienteService = inject(ClienteService);
   cliente!: Cliente;
   clienteObservable!: Observable<Cliente>;
@@ -27,16 +34,13 @@ export class ClientesShowComponent {
     this.cliente = await lastValueFrom(this.clienteObservable);
   }
 
-  getPorteString(porte: Porte): string {
-    switch (porte) {
-      case Porte.PEQUENA:
-        return 'Pequena';
-      case Porte.MEDIA:
-        return 'Média';
-      case Porte.GRANDE:
-        return 'Grande';
-      default:
-        return 'Desconhecido';
-    }
+  async onSave(cliente: Cliente) {
+    this.clienteObservable = this.clienteService.Registrar(cliente);
+    this.cliente = await lastValueFrom(this.clienteObservable);
+    this.router.navigate(['/clientes/exibir/', cliente?.id]);
+  }
+
+  onBack() {
+    this.router.navigate(['/clientes']);
   }
 }

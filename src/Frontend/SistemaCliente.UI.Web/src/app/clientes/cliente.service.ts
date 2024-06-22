@@ -5,11 +5,10 @@ import { Cliente } from './cliente.dto';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClienteService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public RecuperarTodos(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(environment.api + 'cliente');
@@ -17,5 +16,15 @@ export class ClienteService {
 
   public RecuperarPorId(id: Number): Observable<Cliente> {
     return this.http.get<Cliente>(environment.api + 'cliente/' + id);
+  }
+
+  public Registrar(cliente: Cliente): Observable<Cliente> {
+    if (cliente.id)
+      return this.http.put<Cliente>(
+        environment.api + 'cliente/' + cliente.id,
+        cliente
+      );
+
+    return this.http.post<Cliente>(environment.api + 'cliente', cliente);
   }
 }

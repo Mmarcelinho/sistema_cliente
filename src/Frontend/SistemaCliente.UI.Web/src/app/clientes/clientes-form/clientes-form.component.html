@@ -1,0 +1,42 @@
+<form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <mat-form-field class="item">
+      <input
+        matInput
+        placeholder="Nome da empresa"
+        formControlName="nomeEmpresa"
+      />
+      @if (clienteForm.controls['nomeEmpresa'].hasError('required')) {
+      <mat-error> Nome da empresa é obrigátorio.</mat-error>
+      } @if (clienteForm.controls['nomeEmpresa'].hasError('minlength')) {
+      <mat-error> Nome da empresa é muito curto.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="item">
+      <mat-select placeholder="Porte da empresa" formControlName="porte">
+        @for (option of porteOptions; track cliente.porte) {
+        <mat-option [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+        }
+      </mat-select>
+      @if (clienteForm.controls['porte'].hasError('required')) {
+      <mat-error> Porte da empresa é obrigátorio.</mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <mat-card-actions>
+    <button mat-button (click)="onBack($event)">Voltar</button>
+    <div class="width-full"></div>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="clienteForm.invalid"
+      (click)="(onSubmit)"
+    >
+      Salvar
+    </button>
+  </mat-card-actions>
+</form>
