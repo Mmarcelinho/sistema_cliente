@@ -33,8 +33,7 @@ export class ClientesNewComponent implements OnInit {
   }
 
   async onSave(cliente: Cliente) {
-    this.clienteObservable = this.clienteService.Registrar(cliente);
-    const resultado = await lastValueFrom(this.clienteObservable);
+    const resultado = await lastValueFrom(this.clienteService.Registrar(cliente));
     this.router.navigate(['/clientes/exibir/', resultado.id]);
   }
 
