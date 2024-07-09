@@ -26,11 +26,13 @@ export class ClientesDeleteComponent {
   clienteService = inject(ClienteService);
   cliente!: Cliente;
   clienteObservable!: Observable<Cliente>;
+  isLoading: boolean = true;
 
   async ngOnInit() {
     const id: Number = +(this.route.snapshot.paramMap.get('id') || 0);
     this.clienteObservable = this.clienteService.RecuperarPorId(id);
     this.cliente = await lastValueFrom(this.clienteObservable);
+    this.isLoading = false;
   }
 
   onBack() {
@@ -38,8 +40,8 @@ export class ClientesDeleteComponent {
   }
 
     async confirmDelete() {
-    this.clienteObservable = this.clienteService.Deletar(this.cliente.id)
-    await lastValueFrom(this.clienteObservable)
+    this.clienteObservable = this.clienteService.Deletar(this.cliente.id);
+    await lastValueFrom(this.clienteObservable);
     this.router.navigate(['/clientes']);
   }
 }
