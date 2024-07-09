@@ -25,7 +25,7 @@ export class ClientesNewComponent implements OnInit {
   router = inject(Router);
   clienteService = inject(ClienteService);
   clienteObservable!: Observable<Cliente>;
-  cliente: Cliente = this.clienteService.Criar();
+  cliente!: Cliente;
 
   async ngOnInit() {
     this.clienteObservable = await of(this.clienteService.Criar());
