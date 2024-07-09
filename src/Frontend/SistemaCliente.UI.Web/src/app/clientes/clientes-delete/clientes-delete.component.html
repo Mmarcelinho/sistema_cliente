@@ -1,4 +1,4 @@
-@if (clienteObservable | async ) {
+@if ( !isLoading ) {
 <mat-card-content>
   <h3>Deletar {{ cliente.nomeEmpresa }}?</h3>
 </mat-card-content>
