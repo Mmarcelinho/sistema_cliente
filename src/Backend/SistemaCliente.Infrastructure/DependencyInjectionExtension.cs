@@ -1,7 +1,3 @@
-using SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.Dapper;
-using SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.EF;
-using SistemaCliente.Infrastructure.Factory;
-
 namespace SistemaCliente.Infrastructure;
 
 public static class DependencyInjectionExtension
