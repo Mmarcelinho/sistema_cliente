@@ -11,6 +11,9 @@ global using SistemaCliente.Domain.Entidades;
 global using SistemaCliente.Domain.Repositorios;
 global using SistemaCliente.Domain.Repositorios.Cliente;
 
-global using SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio;
 global using SistemaCliente.Infrastructure.AcessoRepositorio;
 global using SistemaCliente.Infrastructure.AcessoRepositorio.Queries;
+global using SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.Dapper;
+global using SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.EF;
+global using SistemaCliente.Infrastructure.Factory;
+

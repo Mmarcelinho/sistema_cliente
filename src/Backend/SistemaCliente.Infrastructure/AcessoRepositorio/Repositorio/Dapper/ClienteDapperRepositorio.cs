@@ -1,5 +1,3 @@
-using SistemaCliente.Infrastructure.Factory;
-
 namespace SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.Dapper;
 
 public class ClienteDapperRepositorio : IClienteReadOnlyRepositorio
