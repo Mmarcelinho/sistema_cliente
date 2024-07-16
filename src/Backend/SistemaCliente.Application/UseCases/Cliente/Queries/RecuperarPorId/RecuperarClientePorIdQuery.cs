@@ -13,7 +13,7 @@ public class RecuperarClientePorIdQueryHandler : IRequestHandler<RecuperarClient
         var cliente = await _repositorio.RecuperarPorId(request.clienteId);
 
         if(cliente is null)
-            throw new Exception(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
+            throw new NaoEncontradoException(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
 
         return new RespostaClienteJson
         (

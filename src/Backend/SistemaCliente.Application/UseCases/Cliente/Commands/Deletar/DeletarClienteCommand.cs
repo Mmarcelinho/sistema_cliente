@@ -19,7 +19,7 @@ public class DeletarClienteCommandHandler : IRequestHandler<DeletarClienteComman
         var resultado = await _repositorio.Deletar(request.clienteId);
 
         if (!resultado)
-            throw new Exception(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
+            throw new NaoEncontradoException(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
 
 
         await _unidadeDeTrabalho.Commit();

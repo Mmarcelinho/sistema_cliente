@@ -24,7 +24,7 @@ public class AtualizarClienteCommandHandler : IRequestHandler<AtualizarClienteCo
         var cliente = await _repositorio.RecuperarPorId(request.Id);
 
         if (cliente is null)
-            throw new Exception(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
+            throw new NaoEncontradoException(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
 
         cliente.NomeEmpresa = request.requisicaoCliente.NomeEmpresa;
         cliente.Porte = (Domain.Enum.Porte)request.requisicaoCliente.Porte;
