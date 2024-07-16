@@ -1,13 +1,12 @@
-namespace Utilitarios.Testes.Commands;
+namespace CommonTestUtilities.Commands;
 
-public class AtualizarClienteCommandBuilder
+public class RegistrarClienteCommandBuilder
 {
-    public static AtualizarClienteCommand Build()
+    public static RegistrarClienteCommand Build()
     {
         var faker = new Faker();
 
-        return new AtualizarClienteCommand(
-            1,
+        return new RegistrarClienteCommand(
             new RequisicaoClienteJson(
             faker.Company.CompanyName(),
             (SistemaCliente.Communication.Enums.Porte)faker.Random.Int(0, 2)
