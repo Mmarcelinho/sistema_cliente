@@ -1,4 +1,4 @@
-namespace Utilitarios.Testes.Requisicoes;
+namespace CommonTestUtilities.Requisicoes;
 
     public class RequisicaoClienteJsonBuilder
     {

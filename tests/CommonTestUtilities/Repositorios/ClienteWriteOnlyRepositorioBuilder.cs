@@ -1,4 +1,4 @@
-namespace Utilitarios.Testes.Repositorios;
+namespace CommonTestUtilities.Repositorios;
 
     public class ClienteWriteOnlyRepositorioBuilder
     {
