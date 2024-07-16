@@ -1,30 +1,33 @@
 namespace SistemaCliente.Application.UseCases.Cliente.Commands.Registrar;
 
-    public record RegistrarClienteCommand(RequisicaoClienteJson requisicaoCliente) : IRequest<RespostaClienteJson>;
+public record RegistrarClienteCommand(RequisicaoClienteJson requisicaoCliente) : IRequest<RespostaClienteJson>;
 
 public class RegistrarClienteCommandHandler : IRequestHandler<RegistrarClienteCommand, RespostaClienteJson>
 {
-    private readonly IClienteWriteOnlyRepositorio _repositorio;
+    private readonly IClienteWriteOnlyRepositorio _repositorioWrite;
+
+    private readonly IClienteReadOnlyRepositorio _repositorioRead;
 
     private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
 
-    public RegistrarClienteCommandHandler(IClienteWriteOnlyRepositorio repositorio, IUnidadeDeTrabalho unidadeDeTrabalho)
+    public RegistrarClienteCommandHandler(IClienteWriteOnlyRepositorio repositorioWrite, IClienteReadOnlyRepositorio repositorioRead, IUnidadeDeTrabalho unidadeDeTrabalho)
     {
-        _repositorio = repositorio;
+        _repositorioWrite = repositorioWrite;
+        _repositorioRead = repositorioRead;
         _unidadeDeTrabalho = unidadeDeTrabalho;
     }
 
     public async Task<RespostaClienteJson> Handle(RegistrarClienteCommand request, CancellationToken cancellationToken)
     {
         await Validar(request.requisicaoCliente);
-        
+
         var cliente = new Domain.Entidades.Cliente
         {
             NomeEmpresa = request.requisicaoCliente.NomeEmpresa,
             Porte = (Domain.Enum.Porte)request.requisicaoCliente.Porte
         };
 
-        await _repositorio.Registrar(cliente);
+        await _repositorioWrite.Registrar(cliente);
 
         await _unidadeDeTrabalho.Commit();
 
@@ -39,9 +42,9 @@ public class RegistrarClienteCommandHandler : IRequestHandler<RegistrarClienteCo
 
     private async Task Validar(RequisicaoClienteJson requisicao)
     {
-        var clienteExiste = await _repositorio.ExisteClienteComEmpresa(requisicao.NomeEmpresa);
+        var clienteExiste = await _repositorioRead.ExisteClienteComEmpresa(requisicao.NomeEmpresa);
 
-        if(clienteExiste)
+        if (clienteExiste)
             throw new Exception(ClienteMensagensDeErro.CLIENTE_JA_REGISTRADO);
     }
 }

@@ -4,24 +4,28 @@ public record DeletarClienteCommand(long clienteId) : IRequest;
 
 public class DeletarClienteCommandHandler : IRequestHandler<DeletarClienteCommand>
 {
-    private readonly IClienteWriteOnlyRepositorio _repositorio;
+    private readonly IClienteWriteOnlyRepositorio _repositorioWrite;
+
+    private readonly IClienteReadOnlyRepositorio _repositorioRead;
 
     private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
 
-    public DeletarClienteCommandHandler(IClienteWriteOnlyRepositorio repositorio, IUnidadeDeTrabalho unidadeDeTrabalho)
+    public DeletarClienteCommandHandler(IClienteWriteOnlyRepositorio repositorioWrite, IClienteReadOnlyRepositorio repositorioRead, IUnidadeDeTrabalho unidadeDeTrabalho)
     {
-        _repositorio = repositorio;
+        _repositorioWrite = repositorioWrite;
+        _repositorioRead = repositorioRead;
         _unidadeDeTrabalho = unidadeDeTrabalho;
     }
 
     public async Task Handle(DeletarClienteCommand request, CancellationToken cancellationToken)
     {
-        var resultado = await _repositorio.Deletar(request.clienteId);
+        var cliente = await _repositorioRead.RecuperarPorId(request.clienteId);
 
-        if (!resultado)
+        if (cliente is null)
             throw new NaoEncontradoException(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
 
-
+        await _repositorioWrite.Deletar(request.clienteId);
+        
         await _unidadeDeTrabalho.Commit();
     }
 }
