@@ -1,0 +1,44 @@
+namespace UseCases.Test.Cliente.Registrar;
+
+public class RegistrarClienteCommandTest
+{
+    [Fact]
+    public async Task Sucesso()
+    {
+        var command = RegistrarClienteCommandBuilder.Build();
+
+        var useCase = CriarUseCase();
+
+        var resultado = await useCase.Handle(command, default);
+
+        resultado.Should().NotBeNull();
+        resultado.NomeEmpresa.Should().Be(command.requisicaoCliente.NomeEmpresa);
+        resultado.Porte.Should().Be(command.requisicaoCliente.Porte);
+    }
+
+    [Fact]
+    public async Task ClienteExistente_DeveRetornarErro()
+    {
+        var command = RegistrarClienteCommandBuilder.Build();
+
+        var useCase = CriarUseCase(command.requisicaoCliente.NomeEmpresa);
+
+        Func<Task> acao = async () => await useCase.Handle(command, default);
+
+        var resultado = await acao.Should().ThrowAsync<Exception>();
+
+        resultado.Where(ex => ex.Message.Contains(ClienteMensagensDeErro.CLIENTE_JA_REGISTRADO));
+    }
+
+    private static RegistrarClienteCommandHandler CriarUseCase(string? nomeEmpresa = null)
+    {
+        var repositorioWrite = ClienteWriteOnlyRepositorioBuilder.Build();
+        var repositorioRead = new ClienteReadOnlyRepositorioBuilder();
+        var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Build();
+
+        if(string.IsNullOrWhiteSpace(nomeEmpresa) == false)
+            repositorioRead.RecuperarClienteExistente(nomeEmpresa);
+
+        return new RegistrarClienteCommandHandler(repositorioWrite, repositorioRead.Build(), unidadeDeTrabalho);
+    }
+}
