@@ -12,7 +12,7 @@ global using SistemaCliente.Application.Validation;
 global using SistemaCliente.Communication.Requisicoes.Cliente;
 global using SistemaCliente.Communication.Respostas.Cliente;
 global using SistemaCliente.Exceptions.MensagensDeErro;
-
+global using SistemaCliente.Exceptions.ExceptionsBase;
 
 
 

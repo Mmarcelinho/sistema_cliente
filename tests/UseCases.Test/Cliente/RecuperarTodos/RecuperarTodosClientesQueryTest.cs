@@ -1,8 +1,3 @@
-using CommonTestUtilities.Entidades;
-using CommonTestUtilities.Repositorios;
-using FluentAssertions;
-using SistemaCliente.Application.UseCases.Cliente.Queries.RecuperarTodos;
-
 namespace UseCases.Test.Cliente.RecuperarTodos;
 
 public class RecuperarTodosClientesQueryTest
@@ -21,9 +16,9 @@ public class RecuperarTodosClientesQueryTest
         resultado.Should().NotBeNull();
     }
 
-    private static RecuperarTodosClientesQuery.RecuperarTodosClientesQueryHandler CriarUseCase(List<SistemaCliente.Domain.Entidades.Cliente> clientes)
+    private static RecuperarTodosClientesQueryHandler CriarUseCase(List<SistemaCliente.Domain.Entidades.Cliente> clientes)
     {
         var repositorio = new ClienteReadOnlyRepositorioBuilder().RecuperarTodos(clientes).Build();
-        return new RecuperarTodosClientesQuery.RecuperarTodosClientesQueryHandler(repositorio);
+        return new RecuperarTodosClientesQueryHandler(repositorio);
     }
 }

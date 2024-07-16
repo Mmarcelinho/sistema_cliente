@@ -1,7 +1,7 @@
 namespace SistemaCliente.Application.UseCases.Cliente.Queries.RecuperarTodos;
 
-public class RecuperarTodosClientesQuery : IRequest<IEnumerable<RespostaClienteJson>>
-{
+public record RecuperarTodosClientesQuery() : IRequest<IEnumerable<RespostaClienteJson>>;
+
     public class RecuperarTodosClientesQueryHandler : IRequestHandler<RecuperarTodosClientesQuery, IEnumerable<RespostaClienteJson>>
     {
         private readonly IClienteReadOnlyRepositorio _repositorio;
@@ -17,4 +17,4 @@ public class RecuperarTodosClientesQuery : IRequest<IEnumerable<RespostaClienteJ
             return resultado;
         }
     }
-}
+
