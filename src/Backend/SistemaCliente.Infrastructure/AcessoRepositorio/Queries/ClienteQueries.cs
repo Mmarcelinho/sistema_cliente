@@ -37,5 +37,20 @@ public class ClienteQueries
 
         return new QueryModel(query, parameters);
     }
+
+    public static QueryModel RecuperarClienteExistentePorNomeEmpresaQuery(string nomeEmpresa)
+    {
+        string tabela = ContextMapping.RecuperarTabelaCliente();
+
+
+        string query = @$"SELECT COUNT(*) FROM {tabela} WHERE [NomeEmpresa] = @NomeEmpresa";
+
+        var parameters = new
+        {
+            NomeEmpresa = nomeEmpresa
+        };
+
+        return new QueryModel(query, parameters);
+    }
 }
 

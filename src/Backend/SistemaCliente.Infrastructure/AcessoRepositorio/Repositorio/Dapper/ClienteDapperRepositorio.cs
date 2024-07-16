@@ -22,5 +22,12 @@ public class ClienteDapperRepositorio : IClienteReadOnlyRepositorio
 
         return resultado;
     }
+
+    public async Task<bool> ExisteClienteComEmpresa(string nomeEmpresa)
+    {
+        var query = ClienteQueries.RecuperarClienteExistentePorNomeEmpresaQuery(nomeEmpresa);
+        var count = await _connection.ExecuteScalarAsync<int>(query.Query, query.Parameters);
+        return count > 0;
+    }
 }
 

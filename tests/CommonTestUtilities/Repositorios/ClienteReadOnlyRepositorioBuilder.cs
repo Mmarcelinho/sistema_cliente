@@ -20,5 +20,12 @@ public class ClienteReadOnlyRepositorioBuilder
         return this;
     }
 
+    public ClienteReadOnlyRepositorioBuilder RecuperarClienteExistente(string nomeEmpresa)
+    {
+        _repositorio.Setup(repositorio => repositorio.ExisteClienteComEmpresa(nomeEmpresa)).ReturnsAsync(true);
+
+        return this;
+    }
+
     public IClienteReadOnlyRepositorio Build() => _repositorio.Object;
 }

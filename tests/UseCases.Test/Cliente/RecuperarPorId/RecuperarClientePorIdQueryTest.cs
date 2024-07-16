@@ -19,7 +19,7 @@ public class RecuperarClientePorIdQueryTest
     }
 
     [Fact]
-    public async Task Erro_Cliente_NaoEncontrado()
+    public async Task ClienteNaoEncontrado_DeveRetornarErro()
     {
         var cliente = ClienteBuilder.Instancia();
 

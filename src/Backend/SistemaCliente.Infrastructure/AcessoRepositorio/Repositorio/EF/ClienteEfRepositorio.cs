@@ -12,16 +12,10 @@ public class ClienteEfRepositorio : IClienteWriteOnlyRepositorio, IClienteUpdate
 
     async Task<Cliente> IClienteUpdateOnlyRepositorio.RecuperarPorId(long clienteId) => await _contexto.Clientes.FirstOrDefaultAsync(cliente => cliente.Id == clienteId);
 
-    public async Task<bool> Deletar(long id)
+    public async Task Deletar(long id)
     {
-        var cliente = await _contexto.Clientes.FirstOrDefaultAsync(cliente => cliente.Id == id);
+        var cliente = await _contexto.Clientes.FindAsync(id);
 
-        if (cliente is null)
-            return false;
-
-        _contexto.Clientes.Remove(cliente);
-        return true;
+        _contexto.Clientes.Remove(cliente!);
     }
-
-    public async Task<bool> ExisteClienteComEmpresa(string nomeEmpresa) => await _contexto.Clientes.AnyAsync(cliente => cliente.NomeEmpresa.Equals(nomeEmpresa));
 }
