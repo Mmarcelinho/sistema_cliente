@@ -7,6 +7,7 @@ global using MediatR;
 global using SistemaCliente.Infrastructure;
 global using SistemaCliente.Infrastructure.Migrations;
 global using SistemaCliente.Infrastructure.AcessoRepositorio;
+global using SistemaCliente.Infrastructure.Extensions;
 
 global using SistemaCliente.Application;
 global using SistemaCliente.Application.UseCases.Cliente.Commands.Registrar;

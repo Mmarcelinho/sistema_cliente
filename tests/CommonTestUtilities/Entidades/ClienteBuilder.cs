@@ -25,4 +25,11 @@ public class ClienteBuilder
         .RuleFor(c => c.NomeEmpresa, faker => faker.Company.CompanyName())
         .RuleFor(c => (int)c.Porte, faker => faker.Random.Int(0, 2));
     }
+
+    public static Cliente InstanciaSemId()
+    {
+        return new Faker<Cliente>()
+        .RuleFor(c => c.NomeEmpresa, faker => faker.Company.CompanyName())
+        .RuleFor(c => (int)c.Porte, faker => faker.Random.Int(0, 2));
+    }
 }

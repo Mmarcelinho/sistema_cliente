@@ -4,7 +4,7 @@ public class ClienteDapperRepositorio : IClienteReadOnlyRepositorio
 {
     private readonly IDbConnection _connection;
 
-    public ClienteDapperRepositorio(SqlFactory sqlFactory) => _connection = sqlFactory.CreateSqlConnection();
+    public ClienteDapperRepositorio(SqlFactory sqlFactory) => _connection = sqlFactory.CriaSqlConnection();
     
 
     public async Task<IEnumerable<Cliente>> RecuperarTodos()
