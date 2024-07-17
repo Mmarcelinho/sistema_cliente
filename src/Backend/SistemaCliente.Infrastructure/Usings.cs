@@ -16,4 +16,4 @@ global using SistemaCliente.Infrastructure.AcessoRepositorio.Queries;
 global using SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.Dapper;
 global using SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.EF;
 global using SistemaCliente.Infrastructure.Factory;
-
+global using SistemaCliente.Infrastructure.Extensions;
