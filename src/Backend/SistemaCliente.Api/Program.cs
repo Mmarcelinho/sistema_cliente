@@ -55,7 +55,8 @@ app.UseCors("AllowSpecificOrigin");
 
 app.MapControllers();
 
-await AtualizarBaseDeDados();
+if (!builder.Configuration.IsTestEnvironment())
+    await AtualizarBaseDeDados();
 
 app.Run();
 
@@ -64,4 +65,9 @@ async Task AtualizarBaseDeDados()
     await using var scope = app.Services.CreateAsyncScope();
 
     await MigrateExtension.MigrateBancoDeDados(scope.ServiceProvider);
+}
+
+public partial class Program 
+{ 
+    protected Program() { }
 }
