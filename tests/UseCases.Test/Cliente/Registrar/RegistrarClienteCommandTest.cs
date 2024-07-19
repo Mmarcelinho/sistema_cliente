@@ -5,7 +5,7 @@ public class RegistrarClienteCommandTest
     [Fact]
     public async Task Sucesso()
     {
-        var command = RegistrarClienteCommandBuilder.Build();
+        var command = RegistrarClienteCommandBuilder.Instancia();
 
         var useCase = CriarUseCase();
 
@@ -19,7 +19,7 @@ public class RegistrarClienteCommandTest
     [Fact]
     public async Task ClienteExistente_DeveRetornarErro()
     {
-        var command = RegistrarClienteCommandBuilder.Build();
+        var command = RegistrarClienteCommandBuilder.Instancia();
 
         var useCase = CriarUseCase(command.requisicaoCliente.NomeEmpresa);
 
@@ -32,13 +32,13 @@ public class RegistrarClienteCommandTest
 
     private static RegistrarClienteCommandHandler CriarUseCase(string? nomeEmpresa = null)
     {
-        var repositorioWrite = ClienteWriteOnlyRepositorioBuilder.Build();
+        var repositorioWrite = ClienteWriteOnlyRepositorioBuilder.Instancia();
         var repositorioRead = new ClienteReadOnlyRepositorioBuilder();
-        var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Build();
+        var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Instancia();
 
         if(string.IsNullOrWhiteSpace(nomeEmpresa) == false)
             repositorioRead.RecuperarClienteExistente(nomeEmpresa);
 
-        return new RegistrarClienteCommandHandler(repositorioWrite, repositorioRead.Build(), unidadeDeTrabalho);
+        return new RegistrarClienteCommandHandler(repositorioWrite, repositorioRead.Instancia(), unidadeDeTrabalho);
     }
 }

@@ -35,7 +35,7 @@ public class RecuperarClientePorIdQueryTest
 
     private static RecuperarClientePorIdQueryHandler CriarUseCase(SistemaCliente.Domain.Entidades.Cliente cliente)
     {
-        var repositorio = new ClienteReadOnlyRepositorioBuilder().RecuperarPorId(cliente).Build();
+        var repositorio = new ClienteReadOnlyRepositorioBuilder().RecuperarPorId(cliente).Instancia();
         return new RecuperarClientePorIdQueryHandler(repositorio);
     }
 }

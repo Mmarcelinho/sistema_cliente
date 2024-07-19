@@ -27,5 +27,5 @@ public class ClienteReadOnlyRepositorioBuilder
         return this;
     }
 
-    public IClienteReadOnlyRepositorio Build() => _repositorio.Object;
+    public IClienteReadOnlyRepositorio Instancia() => _repositorio.Object;
 }

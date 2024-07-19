@@ -2,7 +2,7 @@ namespace CommonTestUtilities.Requisicoes;
 
     public class RequisicaoClienteJsonBuilder
     {
-        public static RequisicaoClienteJson Build()
+        public static RequisicaoClienteJson Instancia()
         {
             var faker = new Faker();
 

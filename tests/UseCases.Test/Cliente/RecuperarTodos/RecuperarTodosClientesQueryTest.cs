@@ -18,7 +18,7 @@ public class RecuperarTodosClientesQueryTest
 
     private static RecuperarTodosClientesQueryHandler CriarUseCase(List<SistemaCliente.Domain.Entidades.Cliente> clientes)
     {
-        var repositorio = new ClienteReadOnlyRepositorioBuilder().RecuperarTodos(clientes).Build();
+        var repositorio = new ClienteReadOnlyRepositorioBuilder().RecuperarTodos(clientes).Instancia();
         return new RecuperarTodosClientesQueryHandler(repositorio);
     }
 }
