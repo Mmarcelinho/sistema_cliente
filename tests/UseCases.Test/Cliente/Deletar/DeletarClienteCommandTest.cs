@@ -34,11 +34,11 @@ public class DeletarClienteCommandTest
 
     private static DeletarClienteCommandHandler CriarUseCase(SistemaCliente.Domain.Entidades.Cliente cliente)
     {
-        var repositorioWrite = ClienteWriteOnlyRepositorioBuilder.Build();
+        var repositorioWrite = ClienteWriteOnlyRepositorioBuilder.Instancia();
         var repositorioRead = new ClienteReadOnlyRepositorioBuilder().RecuperarPorId(cliente);
-        var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Build();
+        var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Instancia();
 
-        return new DeletarClienteCommandHandler(repositorioWrite, repositorioRead.Build(), unidadeDeTrabalho);
+        return new DeletarClienteCommandHandler(repositorioWrite, repositorioRead.Instancia(), unidadeDeTrabalho);
     }
 }
 

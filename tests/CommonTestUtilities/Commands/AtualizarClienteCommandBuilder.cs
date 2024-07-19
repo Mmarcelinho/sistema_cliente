@@ -2,7 +2,7 @@ namespace CommonTestUtilities.Commands;
 
 public class AtualizarClienteCommandBuilder
 {
-    public static AtualizarClienteCommand Build()
+    public static AtualizarClienteCommand Instancia()
     {
         var faker = new Faker();
 

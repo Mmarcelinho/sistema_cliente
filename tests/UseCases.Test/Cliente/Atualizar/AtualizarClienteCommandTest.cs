@@ -5,7 +5,7 @@ public class AtualizarClienteCommandTest
     [Fact]
     public async Task Sucesso()
     {
-        var command = AtualizarClienteCommandBuilder.Build();
+        var command = AtualizarClienteCommandBuilder.Instancia();
 
         var cliente = ClienteBuilder.Instancia();
 
@@ -26,7 +26,7 @@ public class AtualizarClienteCommandTest
     {
         var cliente = ClienteBuilder.Instancia();
 
-        var requisicao = new AtualizarClienteCommand(cliente.Id, RequisicaoClienteJsonBuilder.Build());
+        var requisicao = new AtualizarClienteCommand(cliente.Id, RequisicaoClienteJsonBuilder.Instancia());
 
         var useCase = CriarUseCase(cliente, requisicao.requisicaoCliente.NomeEmpresa);
 
@@ -40,7 +40,7 @@ public class AtualizarClienteCommandTest
     [Fact]
     public async Task ClienteNaoEncontrado_DeveRetornarErro()
     {
-        var command = AtualizarClienteCommandBuilder.Build();
+        var command = AtualizarClienteCommandBuilder.Instancia();
 
         var cliente = ClienteBuilder.Instancia();
 
@@ -57,13 +57,13 @@ public class AtualizarClienteCommandTest
 
     private static AtualizarClienteCommandHandler CriarUseCase(SistemaCliente.Domain.Entidades.Cliente cliente, string? nomeEmpresa = null)
     {
-        var repositorioUpdate = new ClienteUpdateOnlyRepositorioBuilder().RecuperarPorId(cliente).Build();
+        var repositorioUpdate = new ClienteUpdateOnlyRepositorioBuilder().RecuperarPorId(cliente).Instancia();
         var repositorioRead = new ClienteReadOnlyRepositorioBuilder();
-        var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Build();
+        var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Instancia();
 
         if (string.IsNullOrWhiteSpace(nomeEmpresa) == false)
             repositorioRead.RecuperarClienteExistente(nomeEmpresa);
 
-        return new AtualizarClienteCommandHandler(repositorioUpdate, repositorioRead.Build(), unidadeDeTrabalho);
+        return new AtualizarClienteCommandHandler(repositorioUpdate, repositorioRead.Instancia(), unidadeDeTrabalho);
     }
 }

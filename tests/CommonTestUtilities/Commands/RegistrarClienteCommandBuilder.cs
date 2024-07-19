@@ -2,7 +2,7 @@ namespace CommonTestUtilities.Commands;
 
 public class RegistrarClienteCommandBuilder
 {
-    public static RegistrarClienteCommand Build()
+    public static RegistrarClienteCommand Instancia()
     {
         var faker = new Faker();
 

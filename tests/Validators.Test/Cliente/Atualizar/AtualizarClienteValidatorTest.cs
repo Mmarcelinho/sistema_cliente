@@ -7,7 +7,7 @@ public class AtualizarClienteValidatorTest
     {
         var validator = new AtualizarClienteValidator();
 
-        var requisicao = AtualizarClienteCommandBuilder.Build();
+        var requisicao = AtualizarClienteCommandBuilder.Instancia();
 
         var resultado = validator.Validate(requisicao);
 
@@ -19,7 +19,7 @@ public class AtualizarClienteValidatorTest
     {
         var validator = new AtualizarClienteValidator();
 
-        var requisicao = RequisicaoClienteJsonBuilder.Build() with { NomeEmpresa = string.Empty };
+        var requisicao = RequisicaoClienteJsonBuilder.Instancia() with { NomeEmpresa = string.Empty };
 
         var command = new AtualizarClienteCommand(1, requisicao);
 
@@ -35,7 +35,7 @@ public class AtualizarClienteValidatorTest
     {
         var validator = new AtualizarClienteValidator();
 
-        var requisicao = RequisicaoClienteJsonBuilder.Build() with { Porte = (SistemaCliente.Communication.Enums.Porte)3 };
+        var requisicao = RequisicaoClienteJsonBuilder.Instancia() with { Porte = (SistemaCliente.Communication.Enums.Porte)3 };
 
         var command = new AtualizarClienteCommand(1, requisicao);
 

@@ -14,5 +14,5 @@ public class ClienteUpdateOnlyRepositorioBuilder
         return this;
     }
 
-    public IClienteUpdateOnlyRepositorio Build() => _repositorio.Object;
+    public IClienteUpdateOnlyRepositorio Instancia() => _repositorio.Object;
 }

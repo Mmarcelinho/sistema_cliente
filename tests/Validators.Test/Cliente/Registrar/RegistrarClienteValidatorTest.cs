@@ -7,7 +7,7 @@ public class RegistrarClienteValidatorTest
     {
         var validator = new RegistrarClienteValidator();
 
-        var requisicao = RegistrarClienteCommandBuilder.Build();
+        var requisicao = RegistrarClienteCommandBuilder.Instancia();
 
         var resultado = validator.Validate(requisicao);
 
@@ -19,7 +19,7 @@ public class RegistrarClienteValidatorTest
     {
         var validator = new RegistrarClienteValidator();
 
-        var requisicao = RequisicaoClienteJsonBuilder.Build() with { NomeEmpresa = string.Empty };
+        var requisicao = RequisicaoClienteJsonBuilder.Instancia() with { NomeEmpresa = string.Empty };
 
         var command = new RegistrarClienteCommand(requisicao);
 
@@ -35,7 +35,7 @@ public class RegistrarClienteValidatorTest
     {
         var validator = new RegistrarClienteValidator();
 
-        var requisicao = RequisicaoClienteJsonBuilder.Build() with { Porte = (SistemaCliente.Communication.Enums.Porte)3 };
+        var requisicao = RequisicaoClienteJsonBuilder.Instancia() with { Porte = (SistemaCliente.Communication.Enums.Porte)3 };
 
         var command = new RegistrarClienteCommand(requisicao);
 
