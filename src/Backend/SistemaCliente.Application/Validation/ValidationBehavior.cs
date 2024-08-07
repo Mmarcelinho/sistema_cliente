@@ -1,18 +1,14 @@
 namespace SistemaCliente.Application.Validation;
 
-public class ValidationBehavior<TRequisicao, TResposta> : IPipelineBehavior<TRequisicao, TResposta> where TRequisicao : IRequest<TResposta>
+public class ValidationBehavior<TRequisicao, TResposta>(IEnumerable<IValidator<TRequisicao>> validators) : IPipelineBehavior<TRequisicao, TResposta> where TRequisicao : IRequest<TResposta>
 {
-    private readonly IEnumerable<IValidator<TRequisicao>> _validators;
-
-    public ValidationBehavior(IEnumerable<IValidator<TRequisicao>> validators) => _validators = validators;
-
     public async Task<TResposta> Handle(TRequisicao requisicao, RequestHandlerDelegate<TResposta> next, CancellationToken cancellationToken)
     {
-        if (_validators.Any())
+        if (validators.Any())
         {
             var context = new ValidationContext<TRequisicao>(requisicao);
 
-            var validationResults = await Task.WhenAll(_validators.Select(v =>
+            var validationResults = await Task.WhenAll(validators.Select(v =>
             v.ValidateAsync(context, cancellationToken)));
 
             var failures = validationResults

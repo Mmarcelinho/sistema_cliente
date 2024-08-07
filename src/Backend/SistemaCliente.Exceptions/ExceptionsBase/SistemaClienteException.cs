@@ -1,9 +1,7 @@
 namespace SistemaCliente.Exceptions.ExceptionsBase;
 
-public abstract class SistemaClienteException : SystemException
+public abstract class SistemaClienteException(string mensagem) : SystemException(mensagem)
 {
-    protected SistemaClienteException(string mensagem) : base(mensagem) { }
-
     public abstract int StatusCode { get; }
 
     public abstract List<string> RecuperarErros();

@@ -2,19 +2,15 @@ namespace SistemaCliente.Application.UseCases.Cliente.Queries.RecuperarTodos;
 
 public record RecuperarTodosClientesQuery() : IRequest<IEnumerable<RespostaClienteJson>>;
 
-    public class RecuperarTodosClientesQueryHandler : IRequestHandler<RecuperarTodosClientesQuery, IEnumerable<RespostaClienteJson>>
+public class RecuperarTodosClientesQueryHandler(IClienteReadOnlyRepositorio repositorio) : IRequestHandler<RecuperarTodosClientesQuery, IEnumerable<RespostaClienteJson>>
+{
+    public async Task<IEnumerable<RespostaClienteJson>> Handle(RecuperarTodosClientesQuery request, CancellationToken cancellationToken)
     {
-        private readonly IClienteReadOnlyRepositorio _repositorio;
+        var clientes = await repositorio.RecuperarTodos();
 
-        public RecuperarTodosClientesQueryHandler(IClienteReadOnlyRepositorio repositorio) => _repositorio = repositorio;
+        var resultado = clientes.Select(c => new RespostaClienteJson(c.Id, c.NomeEmpresa, (Communication.Enums.Porte)c.Porte, c.DataCriacao)).ToList();
 
-        public async Task<IEnumerable<RespostaClienteJson>> Handle(RecuperarTodosClientesQuery request, CancellationToken cancellationToken)
-        {
-            var clientes = await _repositorio.RecuperarTodos();
-
-            var resultado = clientes.Select(c => new RespostaClienteJson(c.Id, c.NomeEmpresa, (Communication.Enums.Porte)c.Porte, c.DataCriacao)).ToList();
-
-            return resultado;
-        }
+        return resultado;
     }
+}
 
