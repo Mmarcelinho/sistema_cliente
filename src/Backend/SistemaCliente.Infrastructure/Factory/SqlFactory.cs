@@ -2,18 +2,13 @@ using Microsoft.Data.Sqlite;
 
 namespace SistemaCliente.Infrastructure.Factory;
 
-public class SqlFactory
+public class SqlFactory(IConfiguration configuration)
 {
-    private readonly IConfiguration _configuration;
-
-    public SqlFactory(IConfiguration configuration) => _configuration = configuration;
-
-
     public IDbConnection CriaSqlConnection()
     {
-        var connectionString = _configuration.GetConnectionString("Conexao");
+        var connectionString = configuration.GetConnectionString("Conexao");
 
-        if (_configuration.IsTestEnvironment())
+        if (configuration.IsTestEnvironment())
             return new SqliteConnection(connectionString);
 
         return new SqlConnection(connectionString);

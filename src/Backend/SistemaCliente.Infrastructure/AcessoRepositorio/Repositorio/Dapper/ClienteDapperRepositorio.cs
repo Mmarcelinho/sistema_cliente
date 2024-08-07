@@ -1,11 +1,8 @@
 namespace SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.Dapper;
 
-public class ClienteDapperRepositorio : IClienteReadOnlyRepositorio
+public class ClienteDapperRepositorio(SqlFactory sqlFactory) : IClienteReadOnlyRepositorio
 {
-    private readonly IDbConnection _connection;
-
-    public ClienteDapperRepositorio(SqlFactory sqlFactory) => _connection = sqlFactory.CriaSqlConnection();
-    
+    private readonly IDbConnection _connection = sqlFactory.CriaSqlConnection();
 
     public async Task<IEnumerable<Cliente>> RecuperarTodos()
     {

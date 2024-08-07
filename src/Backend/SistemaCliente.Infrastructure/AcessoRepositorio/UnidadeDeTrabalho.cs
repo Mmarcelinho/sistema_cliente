@@ -1,11 +1,6 @@
 namespace SistemaCliente.Infrastructure.AcessoRepositorio;
 
-public class UnidadeDeTrabalho : IUnidadeDeTrabalho
+public class UnidadeDeTrabalho(SistemaClienteContext contexto) : IUnidadeDeTrabalho
 {
-    private readonly SistemaClienteContext _contexto;
-
-    public UnidadeDeTrabalho(SistemaClienteContext contexto) =>
-    _contexto = contexto;
-
-    public async Task Commit() => await _contexto.SaveChangesAsync();
+    public async Task Commit() => await contexto.SaveChangesAsync();
 }

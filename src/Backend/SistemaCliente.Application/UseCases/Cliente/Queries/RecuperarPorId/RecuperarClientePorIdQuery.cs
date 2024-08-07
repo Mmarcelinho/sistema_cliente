@@ -1,16 +1,12 @@
 namespace SistemaCliente.Application.UseCases.Cliente.Queries.RecuperarPorId;
 
-public record RecuperarClientePorIdQuery(long clienteId) : IRequest<RespostaClienteJson>;
+public record RecuperarClientePorIdQuery(long ClienteId) : IRequest<RespostaClienteJson>;
 
-public class RecuperarClientePorIdQueryHandler : IRequestHandler<RecuperarClientePorIdQuery, RespostaClienteJson>
+public class RecuperarClientePorIdQueryHandler(IClienteReadOnlyRepositorio repositorio) : IRequestHandler<RecuperarClientePorIdQuery, RespostaClienteJson>
 {
-    private readonly IClienteReadOnlyRepositorio _repositorio;
-
-        public RecuperarClientePorIdQueryHandler(IClienteReadOnlyRepositorio repositorio) => _repositorio = repositorio;
-
     public async Task<RespostaClienteJson> Handle(RecuperarClientePorIdQuery request, CancellationToken cancellationToken)
     {
-        var cliente = await _repositorio.RecuperarPorId(request.clienteId);
+        var cliente = await repositorio.RecuperarPorId(request.ClienteId);
 
         if(cliente is null)
             throw new NaoEncontradoException(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
