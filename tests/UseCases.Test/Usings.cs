@@ -11,6 +11,4 @@ global using SistemaCliente.Application.UseCases.Cliente.Commands.Registrar;
 global using SistemaCliente.Application.UseCases.Cliente.Commands.Atualizar;
 global using SistemaCliente.Application.UseCases.Cliente.Commands.Deletar;
 
-global using SistemaCliente.Exceptions.ExceptionsBase;
-global using SistemaCliente.Exceptions.MensagensDeErro;
-
+global using SistemaCliente.Domain.ValueObjects;

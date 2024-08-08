@@ -4,10 +4,10 @@ public class RegistrarClienteValidator : AbstractValidator<RegistrarClienteComma
 {
     public RegistrarClienteValidator()
     {
-        RuleFor(cliente => cliente.requisicaoCliente.NomeEmpresa)
-           .NotEmpty().WithMessage(ClienteMensagensDeErro.EMPRESA_CLIENTE_NOME_EM_BRANCO);
+        RuleFor(cliente => cliente.RequisicaoCliente.NomeEmpresa)
+           .NotEmpty().WithMessage(ClienteErrorsConstants.EMPRESA_CLIENTE_NOME_EM_BRANCO);
 
-        RuleFor(cliente => cliente.requisicaoCliente.Porte)
-        .IsInEnum().WithMessage(ClienteMensagensDeErro.EMPRESA_CLIENTE_PORTE_INVALIDO);
+        RuleFor(cliente => cliente.RequisicaoCliente.Porte)
+        .IsInEnum().WithMessage(ClienteErrorsConstants.EMPRESA_CLIENTE_PORTE_INVALIDO);
     }
 }
