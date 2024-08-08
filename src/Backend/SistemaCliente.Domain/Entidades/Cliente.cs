@@ -6,3 +6,5 @@ namespace SistemaCliente.Domain.Entidades;
 
         public Porte Porte { get; set; }
     }
+
+    

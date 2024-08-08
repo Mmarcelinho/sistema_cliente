@@ -27,7 +27,7 @@ public class RegistrarClienteValidatorTest
 
         resultado.IsValid.Should().BeFalse();
 
-        resultado.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ClienteMensagensDeErro.EMPRESA_CLIENTE_NOME_EM_BRANCO));
+        resultado.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ClienteErrorsConstants.EMPRESA_CLIENTE_NOME_EM_BRANCO));
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class RegistrarClienteValidatorTest
     {
         var validator = new RegistrarClienteValidator();
 
-        var requisicao = RequisicaoClienteJsonBuilder.Instancia() with { Porte = (SistemaCliente.Communication.Enums.Porte)3 };
+        var requisicao = RequisicaoClienteJsonBuilder.Instancia() with { Porte = (SistemaCliente.Application.DTOs.Enum.Porte)3 };
 
         var command = new RegistrarClienteCommand(requisicao);
 
@@ -43,6 +43,6 @@ public class RegistrarClienteValidatorTest
 
         resultado.IsValid.Should().BeFalse();
 
-        resultado.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ClienteMensagensDeErro.EMPRESA_CLIENTE_PORTE_INVALIDO));
+        resultado.Errors.Should().ContainSingle().And.Contain(e => e.ErrorMessage.Equals(ClienteErrorsConstants.EMPRESA_CLIENTE_PORTE_INVALIDO));
     }
 }

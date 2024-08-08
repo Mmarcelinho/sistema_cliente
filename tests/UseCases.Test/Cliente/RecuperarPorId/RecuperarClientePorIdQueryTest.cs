@@ -29,8 +29,8 @@ public class RecuperarClientePorIdQueryTest
 
         var acao = async () => await useCase.Handle(query, default);
 
-        await acao.Should().ThrowAsync<NaoEncontradoException>()
-       .Where(exception => exception.RecuperarErros().Count == 1 && exception.RecuperarErros().Contains(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO));
+        await acao.Should().ThrowAsync<Exception>()
+       .Where(exception => exception.Message.Contains(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO));
     }
 
     private static RecuperarClientePorIdQueryHandler CriarUseCase(SistemaCliente.Domain.Entidades.Cliente cliente)

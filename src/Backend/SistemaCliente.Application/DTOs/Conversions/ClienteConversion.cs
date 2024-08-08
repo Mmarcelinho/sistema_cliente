@@ -4,6 +4,14 @@ namespace SistemaCliente.Application.DTOs.Conversions;
 
 public static class ClienteConversion
 {
+    public static Cliente Atualizar(this Cliente cliente, RequisicaoClienteJson requisicaoCliente)
+    {
+        cliente.NomeEmpresa = requisicaoCliente.NomeEmpresa;
+        cliente.Porte = (Domain.Enum.Porte)requisicaoCliente.Porte;
+
+        return cliente;
+    }
+
     public static Cliente ToEntity(RequisicaoClienteJson cliente) => new()
     {
         NomeEmpresa = cliente.NomeEmpresa,

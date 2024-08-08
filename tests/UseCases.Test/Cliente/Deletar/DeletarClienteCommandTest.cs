@@ -29,7 +29,7 @@ public class DeletarClienteCommandTest
 
         var resultado = await acao.Should().ThrowAsync<Exception>();
 
-        resultado.Where(ex => ex.Message.Contains(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO));
+        resultado.Where(ex => ex.Message.Contains(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO));
     }
 
     private static DeletarClienteCommandHandler CriarUseCase(SistemaCliente.Domain.Entidades.Cliente cliente)

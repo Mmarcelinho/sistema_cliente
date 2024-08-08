@@ -15,9 +15,7 @@ global using SistemaCliente.Application.UseCases.Cliente.Queries.RecuperarTodos;
 global using SistemaCliente.Application.UseCases.Cliente.Queries.RecuperarPorId;
 global using SistemaCliente.Application.UseCases.Cliente.Commands.Deletar;
 global using SistemaCliente.Application.UseCases.Cliente.Commands.Atualizar;
-
-global using SistemaCliente.Communication.Requisicoes.Cliente;
-global using SistemaCliente.Communication.Respostas.Cliente;
+global using SistemaCliente.Application.DTOs;
 
 global using SistemaCliente.Exceptions;
 

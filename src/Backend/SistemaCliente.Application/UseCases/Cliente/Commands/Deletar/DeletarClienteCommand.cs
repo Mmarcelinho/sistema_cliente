@@ -11,7 +11,7 @@ public class DeletarClienteCommandHandler(
         var cliente = await repositorioRead.RecuperarPorId(request.ClienteId);
 
         if (cliente is null)
-            throw new NaoEncontradoException(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
+            throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
         await repositorioWrite.Deletar(request.ClienteId);
 
