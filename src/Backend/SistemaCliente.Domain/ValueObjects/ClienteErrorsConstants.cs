@@ -1,6 +1,6 @@
-namespace SistemaCliente.Exceptions.MensagensDeErro;
+namespace SistemaCliente.Domain.ValueObjects;
 
-public static class ClienteMensagensDeErro
+public abstract class ClienteErrorsConstants
 {
     public const string EMPRESA_CLIENTE_NOME_EM_BRANCO = "O nome da empresa do cliente deve ser informado.";
 
