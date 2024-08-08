@@ -8,9 +8,9 @@ public class RecuperarTodosClientesQueryHandler(IClienteReadOnlyRepositorio repo
     {
         var clientes = await repositorio.RecuperarTodos();
 
-        var resultado = clientes.Select(c => new RespostaClienteJson(c.Id, c.NomeEmpresa, (Communication.Enums.Porte)c.Porte, c.DataCriacao)).ToList();
+        var(_, _clientes) = ClienteConversion.FromEntity(null!, clientes);
 
-        return resultado;
+        return _clientes!;
     }
 }
 

@@ -9,15 +9,11 @@ public class RecuperarClientePorIdQueryHandler(IClienteReadOnlyRepositorio repos
         var cliente = await repositorio.RecuperarPorId(request.ClienteId);
 
         if(cliente is null)
-            throw new NaoEncontradoException(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
+            throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
-        return new RespostaClienteJson
-        (
-            cliente.Id,
-            cliente.NomeEmpresa,
-            (Communication.Enums.Porte)cliente.Porte,
-            cliente.DataCriacao
-        );
+        var(_cliente, _) = ClienteConversion.FromEntity(cliente, null!);
+
+        return _cliente!;
     }
 }
 

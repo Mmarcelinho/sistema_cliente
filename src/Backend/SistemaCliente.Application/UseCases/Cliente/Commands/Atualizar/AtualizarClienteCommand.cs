@@ -18,8 +18,7 @@ public class AtualizarClienteCommandHandler(
         if (cliente is null)
             throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
-        cliente.NomeEmpresa = request.RequisicaoCliente.NomeEmpresa;
-        cliente.Porte = (Domain.Enum.Porte)request.RequisicaoCliente.Porte;
+        cliente = ClienteConversion.ToEntity(request.RequisicaoCliente);
 
         repositorioWrite.Atualizar(cliente);
         await unidadeDeTrabalho.Commit();

@@ -6,11 +6,11 @@ global using FluentValidation;
 
 global using SistemaCliente.Domain.Repositorios;
 global using SistemaCliente.Domain.Repositorios.Cliente;
+global using SistemaCliente.Domain.ValueObjects;
 
 global using SistemaCliente.Application.Validation;
+global using SistemaCliente.Application.DTOs;
+global using SistemaCliente.Application.DTOs.Conversions;
 
-global using SistemaCliente.Communication.Requisicoes.Cliente;
-global using SistemaCliente.Communication.Respostas.Cliente;
-global using SistemaCliente.Domain.ValueObjects;
 
 
