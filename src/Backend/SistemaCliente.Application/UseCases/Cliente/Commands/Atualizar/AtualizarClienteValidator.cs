@@ -5,9 +5,9 @@ public class AtualizarClienteValidator : AbstractValidator<AtualizarClienteComma
     public AtualizarClienteValidator()
     {
         RuleFor(cliente => cliente.RequisicaoCliente.NomeEmpresa)
-           .NotEmpty().WithMessage(ClienteMensagensDeErro.EMPRESA_CLIENTE_NOME_EM_BRANCO);
+           .NotEmpty().WithMessage(ClienteErrorsConstants.EMPRESA_CLIENTE_NOME_EM_BRANCO);
 
         RuleFor(cliente => cliente.RequisicaoCliente.Porte)
-        .IsInEnum().WithMessage(ClienteMensagensDeErro.EMPRESA_CLIENTE_PORTE_INVALIDO);
+        .IsInEnum().WithMessage(ClienteErrorsConstants.EMPRESA_CLIENTE_PORTE_INVALIDO);
     }
 }

@@ -1,4 +1,5 @@
 global using System.Data;
+global using System.Linq.Expressions;
 global using Microsoft.Data.SqlClient;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -10,6 +11,7 @@ global using Dapper;
 global using SistemaCliente.Domain.Entidades;
 global using SistemaCliente.Domain.Repositorios;
 global using SistemaCliente.Domain.Repositorios.Cliente;
+global using SistemaCliente.Domain.ValueObjects;
 
 global using SistemaCliente.Infrastructure.AcessoRepositorio;
 global using SistemaCliente.Infrastructure.AcessoRepositorio.Queries;

@@ -22,22 +22,6 @@ public class AtualizarClienteCommandTest
     }
 
     [Fact]
-    public async Task ClienteExistente_DeveRetornarErro()
-    {
-        var cliente = ClienteBuilder.Instancia();
-
-        var requisicao = new AtualizarClienteCommand(cliente.Id, RequisicaoClienteJsonBuilder.Instancia());
-
-        var useCase = CriarUseCase(cliente, requisicao.RequisicaoCliente.NomeEmpresa);
-
-        Func<Task> acao = async () => await useCase.Handle(requisicao, default);
-
-        var resultado = await acao.Should().ThrowAsync<Exception>();
-
-        resultado.Where(ex => ex.Message.Contains(ClienteErrorsConstants.CLIENTE_JA_REGISTRADO));
-    }
-
-    [Fact]
     public async Task ClienteNaoEncontrado_DeveRetornarErro()
     {
         var command = AtualizarClienteCommandBuilder.Instancia();
@@ -55,15 +39,11 @@ public class AtualizarClienteCommandTest
         resultado.Where(ex => ex.Message.Contains(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO));
     }
 
-    private static AtualizarClienteCommandHandler CriarUseCase(SistemaCliente.Domain.Entidades.Cliente cliente, string? nomeEmpresa = null)
+    private static AtualizarClienteCommandHandler CriarUseCase(SistemaCliente.Domain.Entidades.Cliente cliente)
     {
         var repositorioUpdate = new ClienteUpdateOnlyRepositorioBuilder().RecuperarPorId(cliente).Instancia();
-        var repositorioRead = new ClienteReadOnlyRepositorioBuilder();
         var unidadeDeTrabalho = UnidadeDeTrabalhoBuilder.Instancia();
 
-        if (string.IsNullOrWhiteSpace(nomeEmpresa) == false)
-            repositorioRead.RecuperarClienteExistente(nomeEmpresa);
-
-        return new AtualizarClienteCommandHandler(repositorioUpdate, repositorioRead.Instancia(), unidadeDeTrabalho);
+        return new AtualizarClienteCommandHandler(repositorioUpdate, unidadeDeTrabalho);
     }
 }

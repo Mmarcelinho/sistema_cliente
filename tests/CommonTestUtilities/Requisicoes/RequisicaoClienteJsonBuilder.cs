@@ -8,7 +8,7 @@ namespace CommonTestUtilities.Requisicoes;
 
             return new RequisicaoClienteJson(
                 faker.Company.CompanyName(),
-                (SistemaCliente.Communication.Enums.Porte)faker.Random.Int(0,2)
+                (SistemaCliente.Application.DTOs.Enum.Porte)faker.Random.Int(0,2)
             );
         }
     }

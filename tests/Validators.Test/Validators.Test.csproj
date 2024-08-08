@@ -23,8 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommonTestUtilities\CommonTestUtilities.csproj" />
-    <ProjectReference Include="..\..\src\Backend\SistemaCliente.Exceptions\SistemaCliente.Exceptions.csproj" />
-    <ProjectReference Include="..\..\src\Backend\SistemaCliente.Communication\SistemaCliente.Communication.csproj" />
     <ProjectReference Include="..\..\src\Backend\SistemaCliente.Application\SistemaCliente.Application.csproj" />
   </ItemGroup>
 

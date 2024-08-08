@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SistemaCliente.Infrastructure\SistemaCliente.Infrastructure.csproj" />
     <ProjectReference Include="..\SistemaCliente.Application\SistemaCliente.Application.csproj" />
-    <ProjectReference Include="..\SistemaCliente.Communication\SistemaCliente.Communication.csproj" />
   </ItemGroup>
 
 </Project>

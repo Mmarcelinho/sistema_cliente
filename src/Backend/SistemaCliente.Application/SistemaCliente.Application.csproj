@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SistemaCliente.Exceptions\SistemaCliente.Exceptions.csproj" />
-    <ProjectReference Include="..\SistemaCliente.Communication\SistemaCliente.Communication.csproj" />
     <ProjectReference Include="..\SistemaCliente.Domain\SistemaCliente.Domain.csproj" />
   </ItemGroup>
 

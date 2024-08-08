@@ -9,7 +9,7 @@ public class RegistrarClienteCommandBuilder
         return new RegistrarClienteCommand(
             new RequisicaoClienteJson(
             faker.Company.CompanyName(),
-            (SistemaCliente.Communication.Enums.Porte)faker.Random.Int(0, 2)
+            (SistemaCliente.Application.DTOs.Enum.Porte)faker.Random.Int(0, 2)
         )
         );
     }
