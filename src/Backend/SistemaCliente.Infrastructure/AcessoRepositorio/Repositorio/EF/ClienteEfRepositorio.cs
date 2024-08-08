@@ -12,13 +12,24 @@ public class ClienteEfRepositorio(SistemaClienteContext contexto) : IClienteWrit
         await contexto.Clientes.AddAsync(cliente);
     }
 
-    public void Atualizar(Cliente cliente) => contexto.Clientes.Update(cliente);
+    public async void Atualizar(Cliente entidade)
+    {
+        var cliente = await contexto.Clientes.FindAsync(entidade.Id);
+        if (cliente is null)
+            throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
+
+        contexto.Entry(cliente).State = EntityState.Detached;
+
+        contexto.Clientes.Update(entidade);
+    }
 
     async Task<Cliente> IClienteUpdateOnlyRepositorio.RecuperarPorId(long clienteId) => await contexto.Clientes.FirstOrDefaultAsync(cliente => cliente.Id == clienteId);
 
     public async Task Deletar(long id)
     {
         var cliente = await contexto.Clientes.FindAsync(id);
+        if (cliente is null)
+            throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
         contexto.Clientes.Remove(cliente!);
     }

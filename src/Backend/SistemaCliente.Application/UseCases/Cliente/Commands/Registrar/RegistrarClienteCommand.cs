@@ -3,14 +3,14 @@ namespace SistemaCliente.Application.UseCases.Cliente.Commands.Registrar;
 public record RegistrarClienteCommand(RequisicaoClienteJson RequisicaoCliente) : IRequest<RespostaClienteJson>;
 
 public class RegistrarClienteCommandHandler(
-    IClienteWriteOnlyRepositorio repositorioWrite,
+    IClienteWriteOnlyRepositorio repositorio,
     IUnidadeDeTrabalho unidadeDeTrabalho) : IRequestHandler<RegistrarClienteCommand, RespostaClienteJson>
 {
     public async Task<RespostaClienteJson> Handle(RegistrarClienteCommand request, CancellationToken cancellationToken)
     {
         var cliente = ClienteConversion.ToEntity(request.RequisicaoCliente);
 
-        await repositorioWrite.Registrar(cliente);
+        await repositorio.Registrar(cliente);
 
         await unidadeDeTrabalho.Commit();
 
