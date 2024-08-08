@@ -12,8 +12,8 @@ public class RegistrarClienteCommandTest
         var resultado = await useCase.Handle(command, default);
 
         resultado.Should().NotBeNull();
-        resultado.NomeEmpresa.Should().Be(command.requisicaoCliente.NomeEmpresa);
-        resultado.Porte.Should().Be(command.requisicaoCliente.Porte);
+        resultado.NomeEmpresa.Should().Be(command.RequisicaoCliente.NomeEmpresa);
+        resultado.Porte.Should().Be(command.RequisicaoCliente.Porte);
     }
 
     [Fact]
@@ -21,13 +21,13 @@ public class RegistrarClienteCommandTest
     {
         var command = RegistrarClienteCommandBuilder.Instancia();
 
-        var useCase = CriarUseCase(command.requisicaoCliente.NomeEmpresa);
+        var useCase = CriarUseCase(command.RequisicaoCliente.NomeEmpresa);
 
         Func<Task> acao = async () => await useCase.Handle(command, default);
 
         var resultado = await acao.Should().ThrowAsync<Exception>();
 
-        resultado.Where(ex => ex.Message.Contains(ClienteMensagensDeErro.CLIENTE_JA_REGISTRADO));
+        resultado.Where(ex => ex.Message.Contains(ClienteErrorsConstants.CLIENTE_JA_REGISTRADO));
     }
 
     private static RegistrarClienteCommandHandler CriarUseCase(string? nomeEmpresa = null)

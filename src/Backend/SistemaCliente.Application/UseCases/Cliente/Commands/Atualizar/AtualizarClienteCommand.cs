@@ -1,3 +1,5 @@
+
+
 namespace SistemaCliente.Application.UseCases.Cliente.Commands.Atualizar;
 
 public record AtualizarClienteCommand(long Id, RequisicaoClienteJson RequisicaoCliente) : IRequest;
@@ -14,7 +16,7 @@ public class AtualizarClienteCommandHandler(
         var cliente = await repositorioWrite.RecuperarPorId(request.Id);
 
         if (cliente is null)
-            throw new NaoEncontradoException(ClienteMensagensDeErro.CLIENTE_NAO_ENCONTRADO);
+            throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
         cliente.NomeEmpresa = request.RequisicaoCliente.NomeEmpresa;
         cliente.Porte = (Domain.Enum.Porte)request.RequisicaoCliente.Porte;
@@ -28,7 +30,7 @@ public class AtualizarClienteCommandHandler(
         var clienteExiste = await repositorioRead.ExisteClienteComEmpresa(requisicao.NomeEmpresa);
 
         if (clienteExiste)
-            throw new Exception(ClienteMensagensDeErro.CLIENTE_JA_REGISTRADO);
+            throw new Exception(ClienteErrorsConstants.CLIENTE_JA_REGISTRADO);
     }
 }
 
