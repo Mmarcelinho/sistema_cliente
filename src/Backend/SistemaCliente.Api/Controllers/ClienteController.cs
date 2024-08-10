@@ -9,7 +9,7 @@ public class ClienteController(IMediator mediator) : SistemaClienteController
     {
         var resposta = await mediator.Send(new RecuperarTodosClientesQuery());
 
-        return Ok(resposta);
+        return resposta is null? NotFound() : Ok(resposta);
     }
 
     [HttpGet]
@@ -18,9 +18,11 @@ public class ClienteController(IMediator mediator) : SistemaClienteController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> RecuperarPorId([FromRoute] long id)
     {
+        if(id <= 0) return BadRequest();
+
         var resposta = await mediator.Send(new RecuperarClientePorIdQuery(id));
 
-        return Ok(resposta);
+        return resposta is null? NotFound() : Ok(resposta);
     }
 
     [HttpPost]
