@@ -14,7 +14,7 @@ public class RegistrarClienteCommandHandler(
 
         await unidadeDeTrabalho.Commit();
 
-        var (_cliente, _) = ClienteConversion.FromEntity(cliente, null!);
+        var _cliente = ClienteConversion.FromEntity(cliente);
 
         return _cliente!;
     }

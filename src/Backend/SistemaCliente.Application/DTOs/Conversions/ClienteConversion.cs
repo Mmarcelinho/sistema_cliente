@@ -18,34 +18,25 @@ public static class ClienteConversion
         Porte = (Domain.Enum.Porte)cliente.Porte
     };
 
-    public static (RespostaClienteJson?, IEnumerable<RespostaClienteJson>?) FromEntity(Cliente cliente, IEnumerable<Cliente>? clientes)
+    public static RespostaClienteJson FromEntity(Cliente cliente)
     {
-        if (cliente is not null || clientes is null)
-        {
-            var _cliente = new RespostaClienteJson(
-                cliente!.Id,
-                cliente.NomeEmpresa,
-                (Enum.Porte)cliente.Porte,
-                cliente.DataCriacao
-            );
+        return new RespostaClienteJson(
+            cliente.Id,
+            cliente.NomeEmpresa,
+            (Enum.Porte)cliente.Porte,
+            cliente.DataCriacao
+        );
+    }
 
-            return (_cliente, null);
-        }
-
-        if (clientes is not null || cliente is null)
-        {
-            var _clientes = clientes!.Select(c =>
-            new RespostaClienteJson
-            (
-                c!.Id,
+    public static IEnumerable<RespostaClienteJson> FromEntities(IEnumerable<Cliente> clientes)
+    {
+        return clientes.Select(c =>
+            new RespostaClienteJson(
+                c.Id,
                 c.NomeEmpresa,
                 (Enum.Porte)c.Porte,
                 c.DataCriacao
-            )).ToList();
-
-            return (null, _clientes);
-        }
-
-        return (null, null);
+            )
+        ).ToList();
     }
 }

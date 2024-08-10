@@ -11,7 +11,7 @@ public class RecuperarClientePorIdQueryHandler(IClienteReadOnlyRepositorio repos
         if(cliente is null)
             throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
-        var(_cliente, _) = ClienteConversion.FromEntity(cliente, null!);
+        var _cliente = ClienteConversion.FromEntity(cliente);
 
         return _cliente!;
     }
