@@ -8,7 +8,7 @@ public class RecuperarTodosClientesQueryHandler(IClienteReadOnlyRepositorio repo
     {
         var clientes = await repositorio.RecuperarTodos();
 
-        var(_, _clientes) = ClienteConversion.FromEntity(null!, clientes);
+        var _clientes = ClienteConversion.FromEntities(clientes);
 
         return _clientes!;
     }
