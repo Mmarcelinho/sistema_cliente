@@ -1,3 +1,5 @@
+using SistemaCliente.Exceptions.Base;
+
 namespace SistemaCliente.Application.UseCases.Cliente.Commands.Atualizar;
 
 public record AtualizarClienteCommand(long Id, RequisicaoClienteJson RequisicaoCliente) : IRequest;
@@ -11,7 +13,7 @@ public class AtualizarClienteCommandHandler(
         var cliente = await repositorio.RecuperarPorId(request.Id);
 
         if (cliente is null)
-            throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
+            throw new NaoEncontradoException(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
         cliente = cliente.Atualizar(request.RequisicaoCliente);
 

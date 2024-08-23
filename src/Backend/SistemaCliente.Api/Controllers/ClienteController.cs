@@ -9,7 +9,7 @@ public class ClienteController(IMediator mediator) : SistemaClienteController
     {
         var resposta = await mediator.Send(new RecuperarTodosClientesQuery());
 
-        return resposta is null? NotFound() : Ok(resposta);
+        return !resposta.Any()? NotFound() : Ok(resposta);
     }
 
     [HttpGet]

@@ -1,34 +1,55 @@
+using SistemaCliente.Exceptions.Base;
+
 namespace SistemaCliente.Exceptions;
 
-public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
+public class GlobalExceptionHandler : IExceptionHandler
 {
+    private readonly ILogger<GlobalExceptionHandler> _logger;
+
+    public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
+    {
+        _logger = logger;
+    }
+
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
-        ProblemDetails problemDetails = new();
-        problemDetails.Instance = httpContext.Request.Path;
-
-        if (exception is FluentValidation.ValidationException fluentException)
+        var problemDetails = new ProblemDetails
         {
-            problemDetails.Title = "Um ou mais erros de validação ocorreram.";
-            problemDetails.Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1";
-            httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            List<string> validationErrors = [];
-            foreach (var error in fluentException.Errors)
-            {
-                validationErrors.Add(error.ErrorMessage);
-            }
-            problemDetails.Extensions.Add("errors", validationErrors);
+            Instance = httpContext.Request.Path
+        };
+
+        switch (exception)
+        {
+            case FluentValidation.ValidationException fluentException:
+                problemDetails.Title = "Um ou mais erros de validação ocorreram.";
+                problemDetails.Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1";
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                var validationErrors = fluentException.Errors.Select(e => e.ErrorMessage).ToList();
+                problemDetails.Extensions.Add("errors", validationErrors);
+                break;
+
+            case NaoEncontradoException naoEncontradoException:
+                problemDetails.Title = naoEncontradoException.Message;
+                httpContext.Response.StatusCode = (int)naoEncontradoException.RecuperarStatusCode();
+                break;
+
+            case ClienteJaRegistradoException clienteJaRegistradoException:
+                problemDetails.Title = clienteJaRegistradoException.Message;
+                httpContext.Response.StatusCode = StatusCodes.Status409Conflict; 
+                break;
+
+            default:
+                problemDetails.Title = "Ocorreu um erro inesperado.";
+                problemDetails.Detail = exception.Message;
+                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                break;
         }
 
-        else
-        {
-            problemDetails.Title = exception.Message;
-        }
-
-        logger.LogError("{ProblemDetailsTitle}", problemDetails.Title);
+        _logger.LogError(exception, "Erro: {ProblemDetailsTitle}", problemDetails.Title);
 
         problemDetails.Status = httpContext.Response.StatusCode;
         await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken).ConfigureAwait(false);
+
         return true;
     }
 }
