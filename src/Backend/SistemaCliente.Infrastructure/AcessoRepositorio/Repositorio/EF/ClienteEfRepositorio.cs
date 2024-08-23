@@ -1,3 +1,5 @@
+using SistemaCliente.Exceptions.Base;
+
 namespace SistemaCliente.Infrastructure.AcessoRepositorio.Repositorio.EF;
 
 public class ClienteEfRepositorio(SistemaClienteContext contexto) : IClienteWriteOnlyRepositorio, IClienteUpdateOnlyRepositorio
@@ -7,7 +9,7 @@ public class ClienteEfRepositorio(SistemaClienteContext contexto) : IClienteWrit
         var recuperarCliente = await RecuperarPor(_ => _.NomeEmpresa!.Equals(cliente.NomeEmpresa));
 
         if (recuperarCliente is not null && !string.IsNullOrEmpty(recuperarCliente.NomeEmpresa))
-            throw new Exception(ClienteErrorsConstants.CLIENTE_JA_REGISTRADO);
+            throw new ClienteJaRegistradoException(ClienteErrorsConstants.CLIENTE_JA_REGISTRADO);
 
         await contexto.Clientes.AddAsync(cliente);
     }
@@ -15,8 +17,9 @@ public class ClienteEfRepositorio(SistemaClienteContext contexto) : IClienteWrit
     public async void Atualizar(Cliente entidade)
     {
         var cliente = await contexto.Clientes.FindAsync(entidade.Id);
-        if (cliente is null)
-            throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
+        if(cliente is null)
+
+            throw new NaoEncontradoException(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
         contexto.Entry(cliente).State = EntityState.Detached;
 
@@ -29,7 +32,7 @@ public class ClienteEfRepositorio(SistemaClienteContext contexto) : IClienteWrit
     {
         var cliente = await contexto.Clientes.FindAsync(id);
         if (cliente is null)
-            throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
+            throw new NaoEncontradoException(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
         contexto.Clientes.Remove(cliente!);
     }

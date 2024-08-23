@@ -1,3 +1,5 @@
+using SistemaCliente.Exceptions.Base;
+
 namespace SistemaCliente.Application.UseCases.Cliente.Queries.RecuperarPorId;
 
 public record RecuperarClientePorIdQuery(long ClienteId) : IRequest<RespostaClienteJson>;
@@ -9,7 +11,7 @@ public class RecuperarClientePorIdQueryHandler(IClienteReadOnlyRepositorio repos
         var cliente = await repositorio.RecuperarPorId(request.ClienteId);
 
         if(cliente is null)
-            throw new Exception(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
+            throw new NaoEncontradoException(ClienteErrorsConstants.CLIENTE_NAO_ENCONTRADO);
 
         var _cliente = ClienteConversion.FromEntity(cliente);
 
