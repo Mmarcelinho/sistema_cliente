@@ -1,4 +1,4 @@
-Este projeto é um **sistema de cadastro da empresa dos clientes** . Ele utiliza uma abordagem de Clean Architecture, Domain-Driven Design (DDD), e o padrão CQRS com MediatR.
+Este projeto é um **sistema de cadastro da empresa dos clientes**. Ele utiliza uma abordagem de Clean Architecture, Domain-Driven Design (DDD), e o padrão CQRS com MediatR.
 
 ## Sobre o Projeto
 
@@ -7,7 +7,6 @@ O objetivo deste sistema é fornecer uma interface para gerenciar clientes, cate
 #### Técnicas utilizadas para a construção do projeto:
 
 - Clean Architecture
-- Domain-Driven Design (DDD)
 - CQRS Pattern with MediatR
 - SOLID Principles
 
